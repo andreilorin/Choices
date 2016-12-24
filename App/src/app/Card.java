@@ -37,10 +37,13 @@ public class Card {
     public BufferedImage getCardImage(){
         return this.image;
     }
-    
-    @Override
-    public String toString(){
+        
+    public String getRankSuit(){
         return this.rank + " of " + this.suite;
     }
     
+    public int getValue(){
+        return this.value;
+    }
+       
 }
