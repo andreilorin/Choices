@@ -1,6 +1,9 @@
 package app;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -9,48 +12,51 @@ import java.util.ArrayList;
 public class App {
 
     private static final String[] 
-            rank = {"2", "3", "4", "5", "6", "7", 
+            RANK = {"2", "3", "4", "5", "6", "7", 
                 "8", "9", "10", "J", "Q", "K", "A"},
-            suit = {"club", "diamond", "heart", "spade"};   
+            SUIT = {"club", "diamond", "heart", "spade"};   
       
     
     
     public static void main(String[] args) {
-        ArrayList<Card> p1 = new ArrayList<>();
-        ArrayList<Card> p2 = new ArrayList<>();
-        ArrayList<Card> p3 = new ArrayList<>();
-         ArrayList<Card> faceCard = new ArrayList<>();
+        //AL for players hands
+        ArrayList<Card> player1 = new ArrayList<>();
+        ArrayList<Card> player2 = new ArrayList<>();
+        ArrayList<Card> player3 = new ArrayList<>();
         
+        //AL for faceCard
+        ArrayList<Card> faceCard = new ArrayList<>();
         
-        ArrayList<ArrayList<Card>> players = new ArrayList<>();
+        //place to load all the images
+        ArrayList<BufferedImage> allImages = new ArrayList<>();
         
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
+        //add images to AL
+        for(int i=0; i<52; i++){
+            
+            String name = "C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\" + i + ".png";
+            
+            try{
+            BufferedImage bigImage = ImageIO.read(new File(name));
+            allImages.add(bigImage);
+            }catch(Exception e){
+                System.out.println(e);
+            }           
+        }        
+        //AL of players AL
+        ArrayList<ArrayList<Card>> allPlayers = new ArrayList<>();
         
+        //add players to
+        allPlayers.add(player1);
+        allPlayers.add(player2);
+        allPlayers.add(player3);
+        
+        //create dealer
         Dealer dealer = new Dealer();
-        ArrayList<Card> allTheCards = dealer.createAllTheCards(rank, suit);
         
-//        for (int i=0; i<52; i++) {
-//            System.out.println("" + (i+1) + "   " + allTheCards.get(i).getRankSuit());
-//        }
+        //create the cards with images
+        ArrayList<Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
         
-        int i = 0;
-        for (Card c : allTheCards) {
-            System.out.println("" + i + " " +c.getRankSuit());
-            i++;
-        }
-        
-        
-        System.out.println(allTheCards.get(15).getValue());
-        
-        dealer.deal(allTheCards, faceCard, players);
-        
-        for (Card c : p3) {
-            System.out.println(c.getRankSuit());            
-        }
-        
-        System.out.println(faceCard.get(0).getRankSuit());
+        dealer.deal(allTheCards, faceCard, allPlayers);     
         
     }
     
