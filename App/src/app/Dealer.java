@@ -46,19 +46,20 @@ public class Dealer {
         return allTheCards;
     }
     
-    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players){
-        
-        int random = (int)(Math.random() * allTheCards.size());    
+    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players){          
         
         for(int i=0; i<5; i++){
             for (ArrayList<Card> player : players) {                
+                int random = (int)(Math.random() * allTheCards.size()); 
                 Card card = allTheCards.get(random);        
                 player.add(card);
                 allTheCards.remove(random);
             }
         }
+        int random = (int)(Math.random() * allTheCards.size()); 
         Card card = allTheCards.get(random);
         faceCard.add(card);
+        allTheCards.remove(random);
     }
     
 }
