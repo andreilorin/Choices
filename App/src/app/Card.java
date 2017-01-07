@@ -42,6 +42,12 @@ public class Card {
         }        
     }
     
+    /**
+     * Constructor
+     * @param rank = 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
+     * @param suite = club, diamond, heart, spade 
+     * @param image 
+     */
     public Card(String rank, String suite, BufferedImage image){
         this.rank = rank;
         this.suite = suite;
@@ -61,20 +67,13 @@ public class Card {
         this.image = image;
     }
     
-    public String getCard(){
-        return this.rank + " of " + this.suite;
-    }
+    //Getters
+    public String getCard(){return this.rank + " of " + this.suite;}
     
-    public BufferedImage getCardImage(){
-        return this.image;
-    }
-        
-    public String getRankSuit(){
-        return this.rank + " of " + this.suite;
-    }
+    public String getRankSuit(){return this.rank + " of " + this.suite;}
     
-    public int getValue(){
-        return this.value;
-    }
-       
+    public int getValue(){return this.value;}
+    
+    public BufferedImage getCardImage(){return this.image;}
+    
 }

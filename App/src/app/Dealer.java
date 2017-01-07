@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Dealer {    
     /**
-     * Creates a card with rank and suit
+     * Creates an ArrayList of cards
      * @param rank
      * @param suit
      * @return 
@@ -20,16 +20,16 @@ public class Dealer {
                 allTheCards.add(card);
                 
             }            
-        }
-        
+        }        
         return allTheCards;
     }
+    
     /**
-     * Creates a card with image
+     * Creates an ArrayList of cards with image
      * @param rank
      * @param suit
      * @param allImages
-     * @return 
+     * @return
      */
     public ArrayList<Card> createAllTheCards(String[] rank, String[] suit, ArrayList<BufferedImage> allImages){
         
@@ -41,11 +41,16 @@ public class Dealer {
                 allTheCards.add(card);
                 cardNumber++;
             }            
-        }
-        
+        }        
         return allTheCards;
     }
     
+    /**
+     * Deals the cards
+     * @param allTheCards
+     * @param faceCard
+     * @param players 
+     */
     public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players){          
         
         for(int i=0; i<5; i++){
