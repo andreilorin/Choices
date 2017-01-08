@@ -17,8 +17,7 @@ public class Dealer {
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
                 Card card = new Card(rank[i], suit[j]);
-                allTheCards.add(card);
-                
+                allTheCards.add(card);                
             }            
         }        
         return allTheCards;
