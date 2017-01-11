@@ -1,6 +1,7 @@
 package app;
 
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,8 +17,8 @@ public class Card {
     private int
             value;
     
-    private BufferedImage
-            image;
+    private ImageIcon
+            icon;
     
     /**Constructor
      * @param rank = 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
@@ -48,7 +49,7 @@ public class Card {
      * @param suite = club, diamond, heart, spade 
      * @param image 
      */
-    public Card(String rank, String suite, BufferedImage image){
+    public Card(String rank, String suite, ImageIcon icon){
         this.rank = rank;
         this.suite = suite;
         switch(rank){
@@ -64,7 +65,7 @@ public class Card {
             default:
                 this.value = 0;
         }
-        this.image = image;
+        this.icon = icon;
     }
     
     //Getters
@@ -74,6 +75,6 @@ public class Card {
     
     public int getValue(){return this.value;}
     
-    public BufferedImage getCardImage(){return this.image;}
+    public ImageIcon getCardIcon(){return this.icon;}
     
 }

@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,7 +28,7 @@ public class App {
         ArrayList<Card> faceCard = new ArrayList<>();
         
         //place to load all the images
-        ArrayList<BufferedImage> allImages = new ArrayList<>();
+        ArrayList<ImageIcon> allImages = new ArrayList<>();
         
         //add images to ArrayList
         for(int i=0; i<52; i++){
@@ -34,8 +36,8 @@ public class App {
             String name = "C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\" + i + ".png";
                        
             try{
-            BufferedImage bigImage = ImageIO.read(new File(name));
-            allImages.add(bigImage);
+                ImageIcon bigImage = new ImageIcon(name);                
+                allImages.add(bigImage);
             }catch(Exception e){
                 System.out.println(e);
             }           

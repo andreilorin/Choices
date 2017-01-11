@@ -2,6 +2,7 @@ package app;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class Dealer {    
     /**
@@ -30,7 +31,7 @@ public class Dealer {
      * @param allImages
      * @return
      */
-    public ArrayList<Card> createAllTheCards(String[] rank, String[] suit, ArrayList<BufferedImage> allImages){
+    public ArrayList<Card> createAllTheCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
         
         ArrayList<Card> allTheCards = new ArrayList<>();       
         int cardNumber = 0;

@@ -5,17 +5,117 @@
  */
 package app;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Lorin
  */
 public class Main extends javax.swing.JFrame {
+    
+    private static final String[] 
+            RANK = {"2", "3", "4", "5", "6", "7", 
+                "8", "9", "10", "J", "Q", "K", "A"},
+            SUIT = {"club", "diamond", "heart", "spade"};     
 
     /**
      * Creates new form NewJFrame
      */
     public Main() {
+        
+//ArrayList for players hand
+        ArrayList<app.Card> player1 = new ArrayList<>();
+        ArrayList<app.Card> player2 = new ArrayList<>();
+        ArrayList<app.Card> player3 = new ArrayList<>();
+        
+        //ArrayList for faceCard
+        ArrayList<app.Card> faceCard = new ArrayList<>();
+        
+        //place to load all the images
+        ArrayList<ImageIcon> allImages = new ArrayList<>();
+        
+        //add images to ArrayList
+        for(int i=0; i<52; i++){
+            
+            String name = "C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\" + i + ".png";
+                       
+            try{
+                ImageIcon bigImage = new ImageIcon(name);                
+                allImages.add(bigImage);
+            }catch(Exception e){
+                System.out.println(e);
+            }           
+        }        
+        //ArrayList of players AL
+        ArrayList<ArrayList<app.Card>> allPlayers = new ArrayList<>();
+        
+        //add players to allPlayers ArrayList
+        allPlayers.add(player1);
+        allPlayers.add(player2);
+        allPlayers.add(player3);
+        
+        //create dealer
+        Dealer dealer = new Dealer();
+        
+        //create the cards with images
+        ArrayList<app.Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
+        
+        //deal the cards 
+        dealer.deal(allTheCards, faceCard, allPlayers);  
+        
+        
         initComponents();
+        
+        JButton button = new JButton();
+        button.setSize(110, 160);
+        button.setLocation(300, 300);
+        button.setIcon(faceCard.get(0).getCardIcon());
+        
+        //TODO method for moving cards----------------------------------------------------------------------------
+        button.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("a");
+                faceCard.add(allTheCards.get(0));                  // TODO
+                button.setIcon(faceCard.get(1).getCardIcon());     // TODO
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {                
+            }
+        });
+        
+        
+        
+        JLabel label = new JLabel();
+        label.setSize(110, 160);
+        label.setIcon(player1.get(0).getCardIcon());
+        
+        
+        
+        this.add(label);
+        this.add(button);
+        this.setLocation(300, 300);
     }
 
     /**
