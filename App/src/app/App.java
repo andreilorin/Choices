@@ -27,6 +27,9 @@ public class App {
         //ArrayList for faceCard
         ArrayList<Card> faceCard = new ArrayList<>();
         
+        //ArrayList for deck
+        ArrayList<Card> deck = new ArrayList<>();
+        
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
         
@@ -57,7 +60,7 @@ public class App {
         ArrayList<Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
         
         //deal the cards 
-        dealer.deal(allTheCards, faceCard, allPlayers);     
+        dealer.deal(allTheCards, faceCard, allPlayers, deck);     
         
     }
     

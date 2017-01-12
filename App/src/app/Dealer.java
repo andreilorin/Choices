@@ -51,7 +51,7 @@ public class Dealer {
      * @param faceCard
      * @param players 
      */
-    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players){          
+    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players, ArrayList<Card>deck){          
         
         for(int i=0; i<5; i++){
             for (ArrayList<Card> player : players) {                
@@ -65,6 +65,10 @@ public class Dealer {
         Card card = allTheCards.get(random);
         faceCard.add(card);
         allTheCards.remove(random);
+        
+        for(int j=0; j < allTheCards.size(); j++){
+            deck.add(allTheCards.get(j));
+        }
     }
     
 }

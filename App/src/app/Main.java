@@ -32,12 +32,15 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         
 //ArrayList for players hand
-        ArrayList<app.Card> player1 = new ArrayList<>();
-        ArrayList<app.Card> player2 = new ArrayList<>();
-        ArrayList<app.Card> player3 = new ArrayList<>();
+        ArrayList<Card> player1 = new ArrayList<>();
+        ArrayList<Card> player2 = new ArrayList<>();
+        ArrayList<Card> player3 = new ArrayList<>();
         
         //ArrayList for faceCard
-        ArrayList<app.Card> faceCard = new ArrayList<>();
+        ArrayList<Card> faceCard = new ArrayList<>();
+        
+        //ArrayList for deck
+        ArrayList<Card> deck = new ArrayList<>();
         
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
@@ -69,7 +72,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<app.Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
         
         //deal the cards 
-        dealer.deal(allTheCards, faceCard, allPlayers);  
+        dealer.deal(allTheCards, faceCard, allPlayers, deck);  
         
         
         initComponents();
@@ -77,15 +80,22 @@ public class Main extends javax.swing.JFrame {
         JButton button = new JButton();
         button.setSize(110, 160);
         button.setLocation(300, 300);
-        button.setIcon(faceCard.get(0).getCardIcon());
+        button.setIcon(faceCard.get(0).getCardIcon());        
+        
+        
         
         //TODO method for moving cards----------------------------------------------------------------------------
         button.addMouseListener(new MouseListener() {
+            
+            int card = 0;
+            
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("a");
+                System.out.println(card);
                 faceCard.add(allTheCards.get(0));                  // TODO
-                button.setIcon(faceCard.get(1).getCardIcon());     // TODO
+                button.setIcon(player1.get(card).getCardIcon());
+                System.out.println(button.getIcon().toString());
+                card++;// TODO
             }
 
             @Override
