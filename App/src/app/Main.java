@@ -77,15 +77,34 @@ public class Main extends javax.swing.JFrame {
         
         initComponents();
         
-        JButton button = new JButton();
-        button.setSize(110, 160);
-        button.setLocation(300, 300);
-        button.setIcon(faceCard.get(0).getCardIcon());        
+        JButton card1 = new JButton();
+        card1.setSize(110, 160);
+        card1.setLocation(10, 300);
+        card1.setIcon(player1.get(0).getCardIcon());        
         
+        JButton card2 = new JButton();
+        card2.setSize(110, 160);
+        card2.setLocation(140, 300);
+        card2.setIcon(player1.get(1).getCardIcon());
+        
+        JButton card3 = new JButton();
+        card3.setSize(110, 160);
+        card3.setLocation(270, 300);
+        card3.setIcon(player1.get(2).getCardIcon());
+        
+        JButton card4 = new JButton();
+        card4.setSize(110, 160);
+        card4.setLocation(400, 300);
+        card4.setIcon(player1.get(3).getCardIcon());
+        
+        JButton card5 = new JButton();
+        card5.setSize(110, 160);
+        card5.setLocation(530, 300);
+        card5.setIcon(player1.get(4).getCardIcon());
         
         
         //TODO method for moving cards----------------------------------------------------------------------------
-        button.addMouseListener(new MouseListener() {
+        card1.addMouseListener(new MouseListener() {
             
             int card = 0;
             
@@ -93,8 +112,8 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(card);
                 faceCard.add(allTheCards.get(0));                  // TODO
-                button.setIcon(player1.get(card).getCardIcon());
-                System.out.println(button.getIcon().toString());
+                card1.setIcon(player1.get(card).getCardIcon());
+                System.out.println(card1.getIcon().toString());
                 card++;// TODO
             }
 
@@ -120,12 +139,17 @@ public class Main extends javax.swing.JFrame {
         JLabel label = new JLabel();
         label.setSize(110, 160);
         label.setIcon(player1.get(0).getCardIcon());
-        
-        
+        label.setLocation(300, 0);        
         
         this.add(label);
-        this.add(button);
-        this.setLocation(300, 300);
+        
+        this.add(card1);
+        this.add(card2);
+        this.add(card3);
+        this.add(card4);
+        this.add(card5);
+        
+        this.setLocation(600, 300);
     }
 
     /**
