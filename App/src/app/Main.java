@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,15 +33,15 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         
 //ArrayList for players hand
-        ArrayList<Card> player1 = new ArrayList<>();
-        ArrayList<Card> player2 = new ArrayList<>();
-        ArrayList<Card> player3 = new ArrayList<>();
+        ArrayDeque<Card> player1 = new ArrayDeque<>();
+        ArrayDeque<Card> player2 = new ArrayDeque<>();
+        ArrayDeque<Card> player3 = new ArrayDeque<>();
         
         //ArrayList for faceCard
-        ArrayList<Card> faceCard = new ArrayList<>();
+        ArrayDeque<Card> faceCard = new ArrayDeque<>();
         
         //ArrayList for deck
-        ArrayList<Card> deck = new ArrayList<>();
+        ArrayDeque<Card> deck = new ArrayDeque<>();
         
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
@@ -58,7 +59,7 @@ public class Main extends javax.swing.JFrame {
             }           
         }        
         //ArrayList of players AL
-        ArrayList<ArrayList<app.Card>> allPlayers = new ArrayList<>();
+        ArrayList<ArrayDeque<Card>> allPlayers = new ArrayList<>();
         
         //add players to allPlayers ArrayList
         allPlayers.add(player1);
@@ -69,7 +70,7 @@ public class Main extends javax.swing.JFrame {
         Dealer dealer = new Dealer();
         
         //create the cards with images
-        ArrayList<app.Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
+        ArrayList<Card> allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);//   
         
         //deal the cards 
         dealer.deal(allTheCards, faceCard, allPlayers, deck);  
@@ -80,27 +81,27 @@ public class Main extends javax.swing.JFrame {
         JButton card1 = new JButton();
         card1.setSize(110, 160);
         card1.setLocation(10, 300);
-        card1.setIcon(player1.get(0).getCardIcon());        
+        //card1.setIcon(player1.get(0).getCardIcon());       TODO---------------------------------------------------------------  
         
         JButton card2 = new JButton();
         card2.setSize(110, 160);
         card2.setLocation(140, 300);
-        card2.setIcon(player1.get(1).getCardIcon());
+        //card2.setIcon(player1.get(1).getCardIcon());       TODO---------------------------------------------------------------  
         
         JButton card3 = new JButton();
         card3.setSize(110, 160);
         card3.setLocation(270, 300);
-        card3.setIcon(player1.get(2).getCardIcon());
+        //card3.setIcon(player1.get(2).getCardIcon());       TODO---------------------------------------------------------------  
         
         JButton card4 = new JButton();
         card4.setSize(110, 160);
         card4.setLocation(400, 300);
-        card4.setIcon(player1.get(3).getCardIcon());
+        //card4.setIcon(player1.get(3).getCardIcon());       TODO---------------------------------------------------------------  
         
         JButton card5 = new JButton();
         card5.setSize(110, 160);
         card5.setLocation(530, 300);
-        card5.setIcon(player1.get(4).getCardIcon());
+        //card5.setIcon(player1.get(4).getCardIcon());       TODO---------------------------------------------------------------  
         
         
         //TODO method for moving cards----------------------------------------------------------------------------
@@ -112,7 +113,7 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(card);
                 faceCard.add(allTheCards.get(0));                  // TODO
-                card1.setIcon(player1.get(card).getCardIcon());
+                //card1.setIcon(player1.get(card).getCardIcon());
                 System.out.println(card1.getIcon().toString());
                 card++;// TODO
             }
@@ -138,7 +139,7 @@ public class Main extends javax.swing.JFrame {
         
         JLabel label = new JLabel();
         label.setSize(110, 160);
-        label.setIcon(player1.get(0).getCardIcon());
+        //label.setIcon(player1.get(0).getCardIcon());
         label.setLocation(300, 0);        
         
         this.add(label);
