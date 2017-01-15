@@ -39,6 +39,7 @@ public class Main extends javax.swing.JFrame {
         //ArrayList for faceCard
         ArrayList<Card> faceCard = new ArrayList<>();
         
+        //TODO change deck to ArrayDeque
         //ArrayList for deck
         ArrayList<Card> deck = new ArrayList<>();
         
@@ -102,7 +103,7 @@ public class Main extends javax.swing.JFrame {
         card5.setLocation(530, 300);
         card5.setIcon(player1.get(4).getCardIcon());      
         
-        
+                
         //TODO method for moving cards----------------------------------------------------------------------------
         card1.addMouseListener(new MouseListener() {
             
@@ -111,8 +112,14 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println(card);
-                faceCard.add(allTheCards.get(0));                  // TODO
-                //card1.setIcon(player1.get(card).getCardIcon());
+                
+                Card c = player1.get(0);
+                
+                
+                //faceCard.add(allTheCards.get(0));                  // TODO
+                
+                faceCard.add(c);
+                card1.setIcon(player1.get(card).getCardIcon());
                 System.out.println(card1.getIcon().toString());
                 card++;// TODO
             }
@@ -135,10 +142,10 @@ public class Main extends javax.swing.JFrame {
         });
         
         
-        
+        //TODO - change faceCard to ArrayDeque
         JLabel label = new JLabel();
         label.setSize(110, 160);
-        //label.setIcon(player1.get(0).getCardIcon());
+        label.setIcon(faceCard.get(0).getCardIcon());
         label.setLocation(300, 0);        
         
         this.add(label);
@@ -151,7 +158,7 @@ public class Main extends javax.swing.JFrame {
         
         this.setLocation(600, 300);
     }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

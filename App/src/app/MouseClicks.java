@@ -16,17 +16,27 @@ import javax.swing.JButton;
  */
 public class MouseClicks implements MouseListener{
 
-    ArrayList<app.Card> faceCard;// = new ArrayList<>();    
-    ArrayList<app.Card> allTheCards;// = new ArrayList<>();
+    static ArrayList<app.Card> faceCard;// = new ArrayList<>();    
+    static ArrayList<app.Card> allTheCards;// = new ArrayList<>();
     ArrayList<app.Card> player1;// = new ArrayList<>();
     JButton button;// = new JButton();
     
     int card = 0;
     
+    public static void mouseClickPlayerCard(){
+        
+        
+        faceCard.add(allTheCards.get(0));                 
+        
+        
+        
+        
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(card);
-        faceCard.add(allTheCards.get(0));                  // TODO
+        mouseClickPlayerCard();            
         button.setIcon(player1.get(card).getCardIcon());
         card++;// TODO
     }
