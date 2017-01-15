@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -33,15 +32,15 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         
 //ArrayList for players hand
-        ArrayDeque<Card> player1 = new ArrayDeque<>();
-        ArrayDeque<Card> player2 = new ArrayDeque<>();
-        ArrayDeque<Card> player3 = new ArrayDeque<>();
+        ArrayList<Card> player1 = new ArrayList<>();
+        ArrayList<Card> player2 = new ArrayList<>();
+        ArrayList<Card> player3 = new ArrayList<>();
         
         //ArrayList for faceCard
-        ArrayDeque<Card> faceCard = new ArrayDeque<>();
+        ArrayList<Card> faceCard = new ArrayList<>();
         
         //ArrayList for deck
-        ArrayDeque<Card> deck = new ArrayDeque<>();
+        ArrayList<Card> deck = new ArrayList<>();
         
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
@@ -59,7 +58,7 @@ public class Main extends javax.swing.JFrame {
             }           
         }        
         //ArrayList of players AL
-        ArrayList<ArrayDeque<Card>> allPlayers = new ArrayList<>();
+        ArrayList<ArrayList<Card>> allPlayers = new ArrayList<>();
         
         //add players to allPlayers ArrayList
         allPlayers.add(player1);
@@ -81,27 +80,27 @@ public class Main extends javax.swing.JFrame {
         JButton card1 = new JButton();
         card1.setSize(110, 160);
         card1.setLocation(10, 300);
-        //card1.setIcon(player1.get(0).getCardIcon());       TODO---------------------------------------------------------------  
+        card1.setIcon(player1.get(0).getCardIcon());  
         
         JButton card2 = new JButton();
         card2.setSize(110, 160);
         card2.setLocation(140, 300);
-        //card2.setIcon(player1.get(1).getCardIcon());       TODO---------------------------------------------------------------  
+        card2.setIcon(player1.get(1).getCardIcon());
         
         JButton card3 = new JButton();
         card3.setSize(110, 160);
         card3.setLocation(270, 300);
-        //card3.setIcon(player1.get(2).getCardIcon());       TODO---------------------------------------------------------------  
+        card3.setIcon(player1.get(2).getCardIcon());       
         
         JButton card4 = new JButton();
         card4.setSize(110, 160);
         card4.setLocation(400, 300);
-        //card4.setIcon(player1.get(3).getCardIcon());       TODO---------------------------------------------------------------  
+        card4.setIcon(player1.get(3).getCardIcon());       
         
         JButton card5 = new JButton();
         card5.setSize(110, 160);
         card5.setLocation(530, 300);
-        //card5.setIcon(player1.get(4).getCardIcon());       TODO---------------------------------------------------------------  
+        card5.setIcon(player1.get(4).getCardIcon());      
         
         
         //TODO method for moving cards----------------------------------------------------------------------------
