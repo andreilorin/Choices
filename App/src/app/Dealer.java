@@ -1,6 +1,7 @@
 package app;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -52,7 +53,7 @@ public class Dealer {
      * @param players
      * @param deck
      */
-    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players, ArrayList<Card>deck){          
+    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players, ArrayDeque<Card>deck){          
         
         for(int i=0; i<5; i++){
             for (ArrayList<Card> player : players) {                

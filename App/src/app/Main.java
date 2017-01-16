@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -31,7 +32,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         
-//ArrayList for players hand
+        //ArrayList for players hand
         ArrayList<Card> player1 = new ArrayList<>();
         ArrayList<Card> player2 = new ArrayList<>();
         ArrayList<Card> player3 = new ArrayList<>();
@@ -41,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         
         //TODO change deck to ArrayDeque
         //ArrayList for deck
-        ArrayList<Card> deck = new ArrayList<>();
+        ArrayDeque<Card> deck = new ArrayDeque<>();
         
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
@@ -78,6 +79,7 @@ public class Main extends javax.swing.JFrame {
         
         initComponents();
         
+        //Display players cards as buttons with images
         JButton card1 = new JButton();
         card1.setSize(110, 160);
         card1.setLocation(10, 300);
@@ -101,10 +103,33 @@ public class Main extends javax.swing.JFrame {
         JButton card5 = new JButton();
         card5.setSize(110, 160);
         card5.setLocation(530, 300);
-        card5.setIcon(player1.get(4).getCardIcon());      
+        card5.setIcon(player1.get(4).getCardIcon()); 
+        
+        //Display faceCard and deckCard as labels with images
+        JLabel showFaceCard = new JLabel();
+        showFaceCard.setSize(110, 160);
+        showFaceCard.setIcon(faceCard.get(0).getCardIcon());
+        showFaceCard.setLocation(200, 0);        
+       
+        JLabel showDeckCard = new JLabel();
+        showDeckCard.setSize(110, 160);
+        showDeckCard.setIcon(deck.peekLast().getCardIcon());
+        showDeckCard.setLocation(400, 0);  
+        
+        ///Add componets to frame
+        this.add(showDeckCard);
+        this.add(showFaceCard);
+        
+        this.add(card1);
+        this.add(card2);
+        this.add(card3);
+        this.add(card4);
+        this.add(card5);
+        
+        this.setLocation(600, 300);
         
                 
-        //TODO method for moving cards----------------------------------------------------------------------------
+        //TODO method for moving cards------------------------------------------
         card1.addMouseListener(new MouseListener() {
             
             int card = 0;
@@ -115,10 +140,11 @@ public class Main extends javax.swing.JFrame {
                 
                 Card c = player1.get(0);
                 
-                
-                //faceCard.add(allTheCards.get(0));                  // TODO
-                
+                //TODO----------------------------------------------------------
+                //faceCard.add(allTheCards.get(0));  // TODO--------------------              
                 faceCard.add(c);
+                player1.remove(c);
+                showDeckCard.setIcon(c.getCardIcon());
                 card1.setIcon(player1.get(card).getCardIcon());
                 System.out.println(card1.getIcon().toString());
                 card++;// TODO
@@ -139,24 +165,8 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void mouseExited(MouseEvent e) {                
             }
-        });
-        
-        
-        //TODO - change faceCard to ArrayDeque
-        JLabel label = new JLabel();
-        label.setSize(110, 160);
-        label.setIcon(faceCard.get(0).getCardIcon());
-        label.setLocation(300, 0);        
-        
-        this.add(label);
-        
-        this.add(card1);
-        this.add(card2);
-        this.add(card3);
-        this.add(card4);
-        this.add(card5);
-        
-        this.setLocation(600, 300);
+        });   
+
     }
         
     /**
