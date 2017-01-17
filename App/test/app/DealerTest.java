@@ -5,6 +5,9 @@
  */
 package app;
 
+import org.mockito.Mockito;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import org.junit.After;
@@ -13,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.ArgumentCaptor;
 
 /**
  *
@@ -25,7 +29,7 @@ public class DealerTest {
     private static ArrayList<Card> allTheCards;
     private static ArrayList<Card> faceCard;
     private static ArrayList<ArrayList<Card>> players;
-    private static ArrayList<Card> deck;
+    private static ArrayDeque<Card> deck;
     
     
     private static ArrayList<ImageIcon> allImages;
@@ -52,9 +56,7 @@ public class DealerTest {
             }catch(Exception e){
                 System.out.println(e);
             }           
-        }
-
-        
+        }        
     }
     
     @AfterClass
@@ -82,9 +84,7 @@ public class DealerTest {
                
         ArrayList<Card> result = dealer.createAllTheCards(RANK, SUIT);        
         
-        assertEquals(52, result.size());
-        
-        
+        assertEquals(52, result.size());        
     }
 
     /**
@@ -97,7 +97,6 @@ public class DealerTest {
         
         allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);
         assertEquals(52, allTheCards.size());        
-        
     }
 
     /**
@@ -106,13 +105,28 @@ public class DealerTest {
     @Test
     public void testDeal() {
         System.out.println("deal() ");
+        
+        //mock dealer class
+        Dealer dealerMock = Mockito.mock(Dealer.class);
+        
+        //declare captors
+        ArgumentCaptor<ArrayList> arg = ArgumentCaptor.forClass(ArrayList.class);
+        ArgumentCaptor<ArrayList> arg1 = ArgumentCaptor.forClass(ArrayList.class);
+        ArgumentCaptor<ArrayList> arg2 = ArgumentCaptor.forClass(ArrayList.class);
+        ArgumentCaptor<ArrayDeque> arg3 = ArgumentCaptor.forClass(ArrayDeque.class);
                 
-        dealer.deal(allTheCards, faceCard, players, deck);
+        dealerMock.deal(allTheCards, faceCard, players, deck);
         
-        assertEquals(1, deck.size());
+        //test if the method was called once
+        Mockito.verify(dealerMock, Mockito.times(1)).deal(allTheCards, faceCard, players, deck);
         
+        //capture arguments
+        Mockito.verify(dealerMock).deal(arg.capture(), arg1.capture(), arg2.capture(), arg3.capture());     
         
-        
+        //verify the right type of arguments have been captured
+        assertEquals(allTheCards, arg.capture());
+        assertEquals(faceCard, arg1.capture());
+        assertEquals(players, arg2.capture());
+        assertEquals(deck, arg3.capture());
     }
-    
 }
