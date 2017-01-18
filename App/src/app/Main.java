@@ -47,6 +47,9 @@ public class Main extends javax.swing.JFrame {
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
         
+        //create deck image
+        ImageIcon deckImage = new ImageIcon("C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\deckcard.png");
+        
         //add images to ArrayList
         for(int i=0; i<52; i++){
             
@@ -113,7 +116,7 @@ public class Main extends javax.swing.JFrame {
        
         JLabel showDeckCard = new JLabel();
         showDeckCard.setSize(110, 160);
-        showDeckCard.setIcon(deck.peekLast().getCardIcon());
+        showDeckCard.setIcon(deckImage);
         showDeckCard.setLocation(400, 0);  
         
         ///Add componets to frame

@@ -2,6 +2,7 @@ package app;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -28,7 +29,7 @@ public class App {
         ArrayList<Card> faceCard = new ArrayList<>();
         
         //ArrayList for deck
-        ArrayList<Card> deck = new ArrayList<>();
+        ArrayDeque<Card> deck = new ArrayDeque<>();
         
         //place to load all the images
         ArrayList<ImageIcon> allImages = new ArrayList<>();
