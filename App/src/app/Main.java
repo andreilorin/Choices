@@ -84,26 +84,31 @@ public class Main extends javax.swing.JFrame {
         
         //Display players cards as buttons with images
         JButton card1 = new JButton();
+        card1.setName("cone");
         card1.setSize(110, 160);
         card1.setLocation(10, 300);
         card1.setIcon(player1.get(0).getCardIcon());  
         
         JButton card2 = new JButton();
         card2.setSize(110, 160);
+        card2.setName("ctwo");
         card2.setLocation(140, 300);
         card2.setIcon(player1.get(1).getCardIcon());
         
         JButton card3 = new JButton();
-        card3.setSize(110, 160);
+        card3.setName("cthree");
+        card3.setSize(110, 160);        
         card3.setLocation(270, 300);
         card3.setIcon(player1.get(2).getCardIcon());       
         
         JButton card4 = new JButton();
+        card4.setName("cfour");
         card4.setSize(110, 160);
         card4.setLocation(400, 300);
         card4.setIcon(player1.get(3).getCardIcon());       
         
         JButton card5 = new JButton();
+        card5.setName("cfive");
         card5.setSize(110, 160);
         card5.setLocation(530, 300);
         card5.setIcon(player1.get(4).getCardIcon()); 
@@ -129,18 +134,46 @@ public class Main extends javax.swing.JFrame {
         this.add(card4);
         this.add(card5);
                 
-        this.setLocation(600, 300);  
+        this.setLocation(600, 300);        
         
         //Inner class for handling mouse clicks
         class MouseClick implements MouseListener{
 
             int card = 0;
             
+            int cardNumber = 0;
+            
             @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println(card);
+            public void mouseClicked(MouseEvent event) {
+                System.out.println(card);                
                 
-                Card c = player1.get(0);
+                Object source = event.getSource();                
+                
+                if(source instanceof JButton){
+                    
+                    String sourceName = ((JButton)source).getName();
+                    
+                    System.out.println(sourceName);
+                    
+                    if(sourceName.equalsIgnoreCase(card1.getName()))
+                        cardNumber = 0;
+                    else if(sourceName.equalsIgnoreCase(card2.getName()))
+                        cardNumber = 1;
+                    else if(sourceName.equalsIgnoreCase(card3.getName()))
+                        cardNumber = 2;
+                    else if(sourceName.equalsIgnoreCase(card4.getName()))
+                        cardNumber = 3;
+                    else if(sourceName.equalsIgnoreCase(card5.getName()))
+                        cardNumber = 4;
+                    else
+                        {}                    
+                }
+                
+                
+                
+                Card c = player1.get(cardNumber);
+                
+                
                 
                 //TODO----------------------------------------------------------
                 //faceCard.add(allTheCards.get(0));  // TODO--------------------              
