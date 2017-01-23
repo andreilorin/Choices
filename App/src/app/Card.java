@@ -14,7 +14,7 @@ public class Card {
             rank,
             suite;
     
-    private int
+    private final int
             value;
     
     private ImageIcon
@@ -47,7 +47,7 @@ public class Card {
      * Constructor
      * @param rank = 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
      * @param suite = club, diamond, heart, spade 
-     * @param image 
+     * @param icon 
      */
     public Card(String rank, String suite, ImageIcon icon){
         this.rank = rank;

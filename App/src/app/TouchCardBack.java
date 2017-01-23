@@ -8,14 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-public class TouchCard extends JButton {
-    //fields
-    private String
-            rank,
-            suite;
-    
-    private final int
-            value;
+public class TouchCardBack extends JButton {
+    //fields    
     
     private ImageIcon
             icon;
@@ -25,28 +19,14 @@ public class TouchCard extends JButton {
     private volatile int myX = 0;
     private volatile int myY = 0;
 
-    public TouchCard(String rank, String suite, ImageIcon icon) {
+    public TouchCardBack() {
         
-        this.rank = rank;
-        this.suite = suite;
+        ImageIcon deckImage = new ImageIcon("C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\deckcard.png");
         
-        switch(rank){
-            case "2":
-                this.value = 1;
-                break;
-            case "7":
-                this.value = 2;
-                break;
-            case "A":
-                this.value = 3;
-                break;
-            default:
-                this.value = 0;
-        }
+        this.setIcon(deckImage);
         
-        this.icon = icon;
         
-        setBorder(new LineBorder(Color.BLUE, 3));
+        setBorder(new LineBorder(Color.RED, 3));
         setBackground(Color.WHITE);
         setBounds(0, 0, 110, 160);
         setLocation(500, 400);
@@ -99,12 +79,6 @@ public class TouchCard extends JButton {
         });
     }
     
-    //Getters
-    public String getCard(){return this.rank + " of " + this.suite;}
-    
-    public String getRankSuit(){return this.rank + " of " + this.suite;}
-    
-    public int getValue(){return this.value;}
-    
+    //Getters    
     public ImageIcon getCardIcon(){return this.icon;}
 }

@@ -46,6 +46,21 @@ public class Dealer {
         return allTheCards;
     }
     
+    //Create touchcard list
+    public ArrayList<TouchCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
+        
+        ArrayList<TouchCard> allTheCards = new ArrayList<>();       
+        int cardNumber = 0;
+        for(int j=0; j<suit.length; j++){
+            for(int i=0; i<rank.length; i++){            
+                TouchCard card = new TouchCard(rank[i], suit[j], allImages.get(cardNumber));
+                allTheCards.add(card);
+                cardNumber++;
+            }            
+        }        
+        return allTheCards;
+    }
+    
     /**
      * Deals the cards
      * @param allTheCards
