@@ -1,43 +1,38 @@
-package app;
+package app.app;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
+import java.util.ArrayDeque;
 
-class MoveableCardFrame extends JButton {
-
-//    Card card; 
-//    String rank;
-//    String suite;
-//    ImageIcon icon;
+/**
+ * Representation of the face card
+ * @author Lorin
+ */
+public class FaceCard extends Card{
     
-    private volatile int screenX = 0;
-    private volatile int screenY = 0;
-    private volatile int myX = 0;
-    private volatile int myY = 0;
-
-    public MoveableCardFrame(Card card) {
+    /**
+     * Constructor with handle to faceCardArray
+     * @param faceCardArray 
+     */
+    public FaceCard(ArrayDeque<PlayerCard> faceCardArray){
         
-        //card = new Card(rank, suite, icon);
+        //set image
+        this.setIcon(faceCardArray.getFirst().getCardIcon());
         
-        setBorder(new LineBorder(Color.BLUE, 3));
-        setBackground(Color.WHITE);
-        setBounds(0, 0, 110, 160);
-        setLocation(1000, 800);
-        setOpaque(false);
-
-        //add mouse listener
+        //settings
+        setLocation(350, 200);
+        
         addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) { 
-                //setIcon(card.getCardIcon());
+                
+                System.out.println("FACE CARD clicked");
+                
             }
 
+            //Record the position where the mouse was clicked for repositioning
             @Override
             public void mousePressed(MouseEvent e) {
                 screenX = e.getXOnScreen();
@@ -57,10 +52,11 @@ class MoveableCardFrame extends JButton {
             public void mouseExited(MouseEvent e) { }
 
         });
-    
+        
         //add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
-
+            
+            //Reposition based on the mouse location difference
             @Override
             public void mouseDragged(MouseEvent e) {
                 int deltaX = e.getXOnScreen() - screenX;
@@ -73,5 +69,13 @@ class MoveableCardFrame extends JButton {
             public void mouseMoved(MouseEvent e) { }
 
         });
+        
     }
+        
 }
+
+    
+
+    
+    
+

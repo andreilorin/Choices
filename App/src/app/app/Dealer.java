@@ -1,9 +1,11 @@
-package app;
+package app.app;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+
+import app.app.OldCard;
 
 public class Dealer {    
     /**
@@ -12,13 +14,13 @@ public class Dealer {
      * @param suit
      * @return 
      */
-    public ArrayList<Card> createAllTheCards(String[] rank, String[] suit){
+    public ArrayList<OldCard> createAllTheCards(String[] rank, String[] suit){
         
-        ArrayList<Card> allTheCards = new ArrayList<>();       
+        ArrayList<OldCard> allTheCards = new ArrayList<>();       
         
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
-                Card card = new Card(rank[i], suit[j]);
+                OldCard card = new OldCard(rank[i], suit[j]);
                 allTheCards.add(card);                
             }            
         }        
@@ -32,13 +34,13 @@ public class Dealer {
      * @param allImages
      * @return
      */
-    public ArrayList<Card> createAllTheCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
+    public ArrayList<OldCard> createAllTheCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
         
-        ArrayList<Card> allTheCards = new ArrayList<>();       
+        ArrayList<OldCard> allTheCards = new ArrayList<>();       
         int cardNumber = 0;
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
-                Card card = new Card(rank[i], suit[j], allImages.get(cardNumber));
+                OldCard card = new OldCard(rank[i], suit[j], allImages.get(cardNumber));
                 allTheCards.add(card);
                 cardNumber++;
             }            
@@ -47,13 +49,14 @@ public class Dealer {
     }
     
     //Create touchcard list
-    public ArrayList<TouchCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
+    public ArrayList<PlayerCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
+            ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand){
         
-        ArrayList<TouchCard> allTheCards = new ArrayList<>();       
+        ArrayList<PlayerCard> allTheCards = new ArrayList<>();       
         int cardNumber = 0;
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
-                TouchCard card = new TouchCard(rank[i], suit[j], allImages.get(cardNumber));
+                PlayerCard card = new PlayerCard(rank[i], suit[j], allImages.get(cardNumber), faceCard, humanPlayerHand);
                 allTheCards.add(card);
                 cardNumber++;
             }            
@@ -68,18 +71,19 @@ public class Dealer {
      * @param players
      * @param deck
      */
-    public void deal(ArrayList<Card> allTheCards, ArrayList<Card> faceCard, ArrayList<ArrayList<Card>> players, ArrayDeque<Card>deck){          
+    public void deal(ArrayList<PlayerCard> allTheCards, ArrayDeque<PlayerCard> faceCard, ArrayList<ArrayList<PlayerCard>> players, ArrayDeque<PlayerCard>deck){          
         
         for(int i=0; i<5; i++){
-            for (ArrayList<Card> player : players) {                
+            for (ArrayList<PlayerCard> player : players) {                
                 int random = (int)(Math.random() * allTheCards.size()); 
-                Card card = allTheCards.get(random);        
-                player.add(card);
+                PlayerCard tc = allTheCards.get(random);
+                //Card card = tc.getTheCard();
+                player.add(tc);
                 allTheCards.remove(random);
             }
         }
         int random = (int)(Math.random() * allTheCards.size()); 
-        Card card = allTheCards.get(random);
+        PlayerCard card = allTheCards.get(random);
         faceCard.add(card);
         allTheCards.remove(random);
         

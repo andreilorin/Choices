@@ -1,4 +1,4 @@
-package app;
+package app.app;
 
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
  *
  * @author Lorin
  */
-public class Card {    
+public class OldCard {    
      
     //fields
     private String
@@ -24,7 +24,7 @@ public class Card {
      * @param rank = 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
      * @param suite = club, diamond, heart, spade 
      */
-    public Card(String rank, String suite){
+    public OldCard(String rank, String suite){
         this.rank = rank;
         this.suite = suite;
         
@@ -49,7 +49,7 @@ public class Card {
      * @param suite = club, diamond, heart, spade 
      * @param icon 
      */
-    public Card(String rank, String suite, ImageIcon icon){
+    public OldCard(String rank, String suite, ImageIcon icon){
         this.rank = rank;
         this.suite = suite;
         switch(rank){
@@ -75,6 +75,6 @@ public class Card {
     
     public int getValue(){return this.value;}
     
-    public ImageIcon getCardIcon(){return this.icon;}
+    public ImageIcon getCardIcon(){return this.icon;}   
     
 }
