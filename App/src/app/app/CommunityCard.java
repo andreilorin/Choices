@@ -32,21 +32,14 @@ public class CommunityCard extends Card {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //get the source of the event
-                JButton b;
-                b = (JButton)e.getSource();
+                CommunityCard cc = (CommunityCard)e.getSource();                
                 
-                //setIcon(card.getCardIcon());
                 System.out.println("COMM CARD pressed");
-                //setVisible(false);                
-                if(faceCard.getFirst().equals(humanPlayerHand.get(0))){
-                    System.out.println("com card 2");
-                }
-                else
-                System.out.println("com card 3"); 
-                
-                b.setBorder(new LineBorder(Color.ORANGE, 3));                
+                                
+                cc.setBorder(new LineBorder(Color.ORANGE, 3));                
             }
 
+            //Record the position where the mouse was clicked for repositioning
             @Override
             public void mousePressed(MouseEvent e) {
                 screenX = e.getXOnScreen();
@@ -68,7 +61,8 @@ public class CommunityCard extends Card {
     
         //add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
-
+            
+            //Reposition based on the mouse location difference
             @Override
             public void mouseDragged(MouseEvent e) {
                 int deltaX = e.getXOnScreen() - screenX;

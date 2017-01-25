@@ -10,7 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-public class PlayerCard extends JButton {
+/**
+ * Represents player cards
+ * @author Lorin
+ */
+
+public class PlayerCard extends Card {
     //fields
     private String
             rank,
@@ -20,13 +25,17 @@ public class PlayerCard extends JButton {
             value;
     
     private ImageIcon
-            icon;
+            icon;    
     
-    private volatile int screenX = 0;
-    private volatile int screenY = 0;
-    private volatile int myX = 0;
-    private volatile int myY = 0;
 
+    /**
+     * Constructor that gives a handle to faceCard and humanPlayerHand arrays
+     * @param rank String
+     * @param suite String
+     * @param icon ImageIcon
+     * @param faceCard ArrayDeque<PlayerCard>
+     * @param humanPlayerHand ArrayDeque<PlayerCard>
+     */
     public PlayerCard(String rank, String suite, ImageIcon icon, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand) {
         
         this.rank = rank;
@@ -48,35 +57,23 @@ public class PlayerCard extends JButton {
         
         this.icon = icon;
         
-        setBorder(new LineBorder(Color.BLUE, 3));
-        setBackground(Color.WHITE);
-        setBounds(0, 0, 110, 160);
-        setLocation(500, 400);
-        setOpaque(false);
+        setBorder(new LineBorder(Color.BLUE, 3));       
+        setLocation(500, 400);        
 
         //add mouse listener
         addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                //get the source of the event
-                JButton b;
-                b = (JButton)e.getSource();
-                
-                //setIcon(card.getCardIcon());
-                System.out.println("click");
-                //setVisible(false);                
-                if(faceCard.getFirst().equals(humanPlayerHand.get(0))){
-                    System.out.println("they are the same");
-                }
-                else
-                System.out.println("not the same");            
-                
-                
-                b.setBorder(new LineBorder(Color.BLACK, 3));
-                
+                //get the source of the event                
+                PlayerCard pc = (PlayerCard)e.getSource();                
+               
+                System.out.println("clicked on player card " + pc.getCard());                        
+                      
+                pc.setBorder(new LineBorder(Color.BLACK, 3));
             }
-
+            
+            //Record the position where the mouse was clicked for repositioning
             @Override
             public void mousePressed(MouseEvent e) {
                 screenX = e.getXOnScreen();
@@ -99,7 +96,8 @@ public class PlayerCard extends JButton {
     
         //add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
-
+            
+            //Reposition based on the mouse location difference
             @Override
             public void mouseDragged(MouseEvent e) {
                 int deltaX = e.getXOnScreen() - screenX;

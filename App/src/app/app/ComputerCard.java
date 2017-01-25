@@ -19,14 +19,17 @@ public class ComputerCard extends Card {
         
         //add mouse listener
         addMouseListener(new MouseListener() {
-
+            
             @Override
-            public void mouseClicked(MouseEvent e) { 
-                //setIcon(card.getCardIcon());
-                System.out.println("COMPU CARD click");
-                //setVisible(false);
+            public void mouseClicked(MouseEvent e) {
+                //get the source of the event 
+                ComputerCard cc = (ComputerCard)e.getSource();
+                
+                System.out.println("COMPUTER CARD clicked");
+                
             }
 
+            //Record the position where the mouse was clicked for repositioning
             @Override
             public void mousePressed(MouseEvent e) {
                 screenX = e.getXOnScreen();
@@ -49,7 +52,8 @@ public class ComputerCard extends Card {
     
         //add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
-
+            
+            //Reposition based on the mouse location difference
             @Override
             public void mouseDragged(MouseEvent e) {
                 int deltaX = e.getXOnScreen() - screenX;
@@ -64,4 +68,7 @@ public class ComputerCard extends Card {
         });
     }
     
+    public String getName(){
+        return this.toString();
+    }
 }

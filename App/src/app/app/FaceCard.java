@@ -27,7 +27,8 @@ public class FaceCard extends Card{
 
             @Override
             public void mouseClicked(MouseEvent e) { 
-                
+                //get the source of the event                
+                FaceCard pc = (FaceCard)e.getSource(); 
                 System.out.println("FACE CARD clicked");
                 
             }

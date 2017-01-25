@@ -46,11 +46,9 @@ public class Table extends JFrame{
     static ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
         
     //ArrayDeque for ComunityCards
-    ArrayDeque<PlayerCard> communityCardsArray=  new ArrayDeque<>();
+    ArrayDeque<PlayerCard> communityCardsArray=  new ArrayDeque<>();    
     
-    
-    //static GameRules game = new GameRules();
-    
+        
     public static void main(String[] args) {
         
         Table t = new Table();       
@@ -62,10 +60,7 @@ public class Table extends JFrame{
             card.setLocation(playerX, 400);
             playerX += 110;            
             t.add(card);
-        }
-        
-        //game.playerClickHisCard(faceCard, humanPlayerHand);
-        
+        }                
     }
     
     public Table(){        
@@ -98,11 +93,7 @@ public class Table extends JFrame{
         allPlayers.add(humanPlayerHand);
         
         //deal the cards
-        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);
-
-        //======================================================================
-        //TODO - create TouchCard interface/abstract class
-        //======================================================================        
+        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
         
         //create CardtoCommunityCard for comunityCard
         CommunityCard communityCard = new CommunityCard(faceCardArray, humanPlayerHand);
@@ -110,28 +101,48 @@ public class Table extends JFrame{
         //create CardtoFaceCard  for faceCArd
         FaceCard faceCard = new FaceCard(faceCardArray);
         
-        //create ComputerPlayerTouchCard for computer1**************************       
+        //create ComputerCard for computer1
         ComputerCard computer1 = new ComputerCard();               
         computer1.setLocation(0, 200);
         
-        //create ComputerPlayerTouchCard for computer2        
+        //create ComputerCard for computer2        
         ComputerCard computer2 = new ComputerCard();         
         computer2.setLocation(450, 0);
         
-        //create ComputerPlayerTouchCard for computer3   
+        //create ComputerCard for computer3   
         ComputerCard computer3 = new ComputerCard();
         computer3.setLocation(870, 150); 
         
+        //add communityCard, faceCard and computer cards to the table
         this.add(communityCard);
         this.add(faceCard);
         this.add(computer1);
         this.add(computer2);
         this.add(computer3);
         
+        //add plater cards on table
+        placePlayerCardsOnTable();
+        
+        //frame settings
         this.setSize(1000, 600);
         this.setLocation(500, 200);
+        this.setTitle("Choices");
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
         this.setVisible(true);
     }
     
+    /**
+     * Adds all the cards from the humanPlayerHand array to the table
+     */
+    private void placePlayerCardsOnTable(){
+        int playerX = 200;
+        
+        for(PlayerCard card: humanPlayerHand){
+            card.setIcon(card.getCardIcon());
+            card.setLocation(playerX, 400);
+            playerX += 110;            
+            this.add(card);
+        }
+    }
 }
