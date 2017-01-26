@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**
- * Representation of the CommunityCard
+ * Representation of the CommunityCard, extends Card
  * @author Lorin
  */
 public class CommunityCard extends Card {

@@ -6,7 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayDeque;
 
 /**
- * Representation of the face card
+ * Representation of the face card, extends Card
  * @author Lorin
  */
 public class FaceCard extends Card{

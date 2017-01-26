@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
 /**
- *
+ *  Game class
  * @author Lorin
  */
 public class Table extends JFrame{
@@ -29,15 +29,14 @@ public class Table extends JFrame{
     
     //Array to store all the cards
     ArrayList<PlayerCard> allTheCards;
-
     
     //ArrayList for computer players 
-    ArrayList<PlayerCard> player1 = new ArrayList<>();
-    ArrayList<PlayerCard> player2 = new ArrayList<>();
-    ArrayList<PlayerCard> player3 = new ArrayList<>();
+    ArrayList<PlayerCard> computer1hand = new ArrayList<>();
+    ArrayList<PlayerCard> computer2hand = new ArrayList<>();
+    ArrayList<PlayerCard> computer3hand = new ArrayList<>();
     
     //ArrayList for human player
-    static ArrayList<PlayerCard> humanPlayerHand = new ArrayList<>(); 
+    static ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
     
     //ArrayList of players AL
     ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
@@ -48,25 +47,19 @@ public class Table extends JFrame{
     //ArrayDeque for ComunityCards
     ArrayDeque<PlayerCard> communityCardsArray=  new ArrayDeque<>();    
     
-        
+    //main method    
     public static void main(String[] args) {
         
-        Table t = new Table();       
-
-        int playerX = 200;
-        
-        for(PlayerCard card: humanPlayerHand){
-            card.setIcon(card.getCardIcon());
-            card.setLocation(playerX, 400);
-            playerX += 110;            
-            t.add(card);
-        }                
+        new Table();
     }
     
+    /**
+     * Sets up the table and the cards
+     */
     public Table(){        
         this.setLayout(null);        
         
-        //add images to to -allImages- ArrayList
+        //add images to to allImages ArrayList
         for(int i=0; i<52; i++){
             
             String name = "C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\" + i + ".png";
@@ -83,20 +76,20 @@ public class Table extends JFrame{
         dealer = new Dealer();
         
         //create and add all the cards to the array
-        allTheCards = dealer.createAllTheTouchCards(RANK, SUIT, allImages, faceCardArray, humanPlayerHand);// 
+        allTheCards = dealer.createAllTheTouchCards(RANK, SUIT, allImages, faceCardArray, playerHand);// 
         
         //add players array to one array
-        allPlayers.add(player1);
-        allPlayers.add(player2);
-        allPlayers.add(player3);
+        allPlayers.add(computer1hand);
+        allPlayers.add(computer2hand);
+        allPlayers.add(computer3hand);
         
-        allPlayers.add(humanPlayerHand);
+        allPlayers.add(playerHand);
         
         //deal the cards
         dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
         
         //create CardtoCommunityCard for comunityCard
-        CommunityCard communityCard = new CommunityCard(faceCardArray, humanPlayerHand);
+        CommunityCard communityCard = new CommunityCard(faceCardArray, playerHand);
         
         //create CardtoFaceCard  for faceCArd
         FaceCard faceCard = new FaceCard(faceCardArray);
@@ -129,7 +122,7 @@ public class Table extends JFrame{
         this.setTitle("Choices");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
-        this.setVisible(true);
+        this.setVisible(true);       
     }
     
     /**
@@ -138,7 +131,7 @@ public class Table extends JFrame{
     private void placePlayerCardsOnTable(){
         int playerX = 200;
         
-        for(PlayerCard card: humanPlayerHand){
+        for(PlayerCard card: playerHand){
             card.setIcon(card.getCardIcon());
             card.setLocation(playerX, 400);
             playerX += 110;            

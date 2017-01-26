@@ -8,13 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
 /**
- * Representation of the computer card
+ * Representation of the computer card, extends Card
  * @author Lorin
  */
 public class ComputerCard extends Card {
     
     public ComputerCard(){       
-        
+        //set border color to differentiate from other type of cards
         setBorder(new LineBorder(Color.RED, 3));
         
         //add mouse listener
@@ -25,8 +25,7 @@ public class ComputerCard extends Card {
                 //get the source of the event 
                 ComputerCard cc = (ComputerCard)e.getSource();
                 
-                System.out.println("COMPUTER CARD clicked");
-                
+                System.out.println("COMPUTER CARD clicked");                
             }
 
             //Record the position where the mouse was clicked for repositioning

@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**
- * Represents player cards
+ * Represents player cards, extends Card
  * @author Lorin
  */
 
 public class PlayerCard extends Card {
-    //fields
+    //Fields
     private String
             rank,
             suite;
@@ -27,14 +27,13 @@ public class PlayerCard extends Card {
     private ImageIcon
             icon;    
     
-
     /**
      * Constructor that gives a handle to faceCard and humanPlayerHand arrays
-     * @param rank String
-     * @param suite String
-     * @param icon ImageIcon
-     * @param faceCard ArrayDeque<PlayerCard>
-     * @param humanPlayerHand ArrayDeque<PlayerCard>
+     * @param rank
+     * @param suite
+     * @param icon
+     * @param faceCard
+     * @param humanPlayerHand
      */
     public PlayerCard(String rank, String suite, ImageIcon icon, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand) {
         
@@ -57,15 +56,16 @@ public class PlayerCard extends Card {
         
         this.icon = icon;
         
+        //Set border color to differentiate from other type of cards
         setBorder(new LineBorder(Color.BLUE, 3));       
         setLocation(500, 400);        
 
-        //add mouse listener
+        //Add mouse listener
         addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                //get the source of the event                
+                //Get the source of the event                
                 PlayerCard pc = (PlayerCard)e.getSource();                
                
                 System.out.println("clicked on player card " + pc.getCard());                        
@@ -94,7 +94,7 @@ public class PlayerCard extends Card {
 
         });
     
-        //add mouse motion listener
+        //Add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
             
             //Reposition based on the mouse location difference
