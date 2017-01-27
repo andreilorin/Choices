@@ -20,6 +20,9 @@ public abstract class Card extends JButton{
     public volatile int myX = 0;
     public volatile int myY = 0;
     
+    private static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    private static final String[] SUIT = {"club", "diamond", "heart", "spade"};
+    
     public final ImageIcon backOfTheCard = new ImageIcon("C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\deckcard.png");
 
     /**
@@ -33,5 +36,43 @@ public abstract class Card extends JButton{
         setSize(110, 160);        
         setOpaque(false);
         setIcon(backOfTheCard);
-    }       
+        
+        //Add mouse motion listener
+        //Record the position where the mouse was clicked for 
+        //repositioning implemented in the child classes by adding 
+        //MouseListener        
+        addMouseMotionListener(new MouseMotionListener() {
+            
+            //Reposition based on the mouse location difference
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int deltaX = e.getXOnScreen() - screenX;
+                int deltaY = e.getYOnScreen() - screenY;     
+               
+                setLocation(myX + deltaX, myY + deltaY);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) { }
+
+        });  
+    }
+
+    /**
+     * Returns RANK
+     * @return 
+     */
+    public static String[] getRANK() {
+        return RANK;
+    }
+
+    /**
+     * Returns SUIT
+     * @return 
+     */
+    public static String[] getSUIT() {
+        return SUIT;
+    }
+    
+    
 }

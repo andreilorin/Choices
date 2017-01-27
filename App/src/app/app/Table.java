@@ -19,11 +19,8 @@ import javax.swing.border.LineBorder;
  */
 public class Table extends JFrame{
     
-    private Dealer dealer;
-    
-    private final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    private final String[] SUIT = {"club", "diamond", "heart", "spade"};
-    
+    private Dealer dealer;   
+   
     //Array to load all the images
     ArrayList<ImageIcon> allImages = new ArrayList<>(); 
     
@@ -76,7 +73,8 @@ public class Table extends JFrame{
         dealer = new Dealer();
         
         //create and add all the cards to the array
-        allTheCards = dealer.createAllTheTouchCards(RANK, SUIT, allImages, faceCardArray, playerHand);// 
+        allTheCards = dealer.createAllTheTouchCards(Card.getRANK(), Card.getSUIT(), 
+                allImages, faceCardArray, playerHand);// 
         
         //add players array to one array
         allPlayers.add(computer1hand);
@@ -89,7 +87,8 @@ public class Table extends JFrame{
         dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
         
         //create CardtoCommunityCard for comunityCard
-        CommunityCard communityCard = new CommunityCard(faceCardArray, playerHand);
+        CommunityCard communityCard = new CommunityCard(this, faceCardArray, 
+                playerHand, communityCardsArray);
         
         //create CardtoFaceCard  for faceCArd
         FaceCard faceCard = new FaceCard(faceCardArray);
@@ -127,14 +126,19 @@ public class Table extends JFrame{
     
     /**
      * Adds all the cards from the humanPlayerHand array to the table
-     */
-    private void placePlayerCardsOnTable(){
-        int playerX = 200;
+     */    
+    public void placePlayerCardsOnTable(){        
+        int playerX = 700;
+        int aaa = 600/playerHand.size(); 
         
         for(PlayerCard card: playerHand){
-            card.setIcon(card.getCardIcon());
+            
+            card.setIcon(card.getCardIcon());          
+           
             card.setLocation(playerX, 400);
-            playerX += 110;            
+            
+            playerX -= aaa;
+            
             this.add(card);
         }
     }

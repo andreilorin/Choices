@@ -18,10 +18,12 @@ public class CommunityCard extends Card {
     
     /**
      * Constructor that gets a handle to the faceCard array and human card array
+     * @param table
      * @param faceCard
-     * @param humanPlayerHand 
+     * @param playerHand
+     * @param communityCardsArray 
      */
-    public CommunityCard(ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand) {
+    public CommunityCard(Table table, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> playerHand, ArrayDeque<PlayerCard> communityCardsArray) {
                 
         //settings
         setLocation(550, 200);
@@ -32,11 +34,17 @@ public class CommunityCard extends Card {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //get the source of the event
-                CommunityCard cc = (CommunityCard)e.getSource();                
+                CommunityCard cc = (CommunityCard)e.getSource();
+                
+                //Get the first card from and communitycardarray and place it
+                //in the humanplayer array
+                playerHand.add(communityCardsArray.pollFirst());
                 
                 System.out.println("COMM CARD pressed");
                                 
-                cc.setBorder(new LineBorder(Color.ORANGE, 3));                
+                cc.setBorder(new LineBorder(Color.ORANGE, 3));
+
+                table.placePlayerCardsOnTable();
             }
 
             //Record the position where the mouse was clicked for repositioning
