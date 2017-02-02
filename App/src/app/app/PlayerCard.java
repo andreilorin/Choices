@@ -29,6 +29,7 @@ public class PlayerCard extends Card {
     
     /**
      * Constructor that gives a handle to faceCard and humanPlayerHand arrays
+     * Adds MouseListener
      * @param rank
      * @param suite
      * @param icon
@@ -68,7 +69,7 @@ public class PlayerCard extends Card {
                 //Get the source of the event                
                 PlayerCard pc = (PlayerCard)e.getSource();                
                
-                System.out.println("clicked on player card " + pc.getCard());                        
+                System.out.println("clicked on player card " + pc.getCardValues());                        
                       
                 pc.setBorder(new LineBorder(Color.BLACK, 3));
             }
@@ -112,12 +113,33 @@ public class PlayerCard extends Card {
         });
     }
     
-    //Getters
-    public String getCard(){return this.rank + " of " + this.suite;}
+    /**
+     * Returns a String representation of the card's value
+     * @return String
+     */
+    public String getCardValues(){return this.rank + " of " + this.suite;}
     
-    public String getRankSuit(){return this.rank + " of " + this.suite;}
-    
+    /**
+     * Return the value of the cards as an int
+     * @return int
+     */
     public int getValue(){return this.value;}
     
+    /**
+     * Returns a String representation of the card's rank
+     * @return String
+     */
+    public String getRank(){return this.rank;}
+    
+    /**
+     * Returns a String representation of the card's suite
+     * @return String
+     */
+    public String getSuite(){return this.suite;}
+    
+    /**
+     * Return the card's icon
+     * @return ImageIcon
+     */
     public ImageIcon getCardIcon(){return this.icon;}
 }

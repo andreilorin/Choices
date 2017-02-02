@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**
- * Base representation of the card
+ * Base representation of the card, gets extended by all the other card classes
  * @author Lorin 
  */
 public abstract class Card extends JButton{
@@ -27,6 +27,7 @@ public abstract class Card extends JButton{
 
     /**
      * No arguments constructor with default settings
+     * Adds MouseMotionListener
      */
     public Card() {        
         //settings
@@ -60,7 +61,7 @@ public abstract class Card extends JButton{
 
     /**
      * Returns RANK
-     * @return 
+     * @return String[]
      */
     public static String[] getRANK() {
         return RANK;
@@ -68,11 +69,9 @@ public abstract class Card extends JButton{
 
     /**
      * Returns SUIT
-     * @return 
+     * @return String[]
      */
     public static String[] getSUIT() {
         return SUIT;
-    }
-    
-    
+    }  
 }

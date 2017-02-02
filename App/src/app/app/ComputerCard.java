@@ -13,6 +13,10 @@ import javax.swing.border.LineBorder;
  */
 public class ComputerCard extends Card {
     
+    /**
+     * No arguments constructor with default settings
+     * Adds MouseMotionListener
+     */
     public ComputerCard(){       
         //set border color to differentiate from other type of cards
         setBorder(new LineBorder(Color.RED, 3));
@@ -48,26 +52,5 @@ public class ComputerCard extends Card {
             public void mouseExited(MouseEvent e) { }
 
         });
-    
-        //add mouse motion listener
-        addMouseMotionListener(new MouseMotionListener() {
-            
-            //Reposition based on the mouse location difference
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int deltaX = e.getXOnScreen() - screenX;
-                int deltaY = e.getYOnScreen() - screenY;
-
-                setLocation(myX + deltaX, myY + deltaY);
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) { }
-
-        });
-    }
-    
-    public String getName(){
-        return this.toString();
     }
 }

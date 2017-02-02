@@ -1,54 +1,24 @@
 package app.app;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-import app.app.OldCard;
-
+/**
+ * Represents the dealer
+ * @author Lorin
+ */
 public class Dealer {    
+   
     /**
-     * Creates an ArrayList of cards
-     * @param rank
-     * @param suit
-     * @return 
-     */
-    public ArrayList<OldCard> createAllTheCards(String[] rank, String[] suit){
-        
-        ArrayList<OldCard> allTheCards = new ArrayList<>();       
-        
-        for(int j=0; j<suit.length; j++){
-            for(int i=0; i<rank.length; i++){            
-                OldCard card = new OldCard(rank[i], suit[j]);
-                allTheCards.add(card);                
-            }            
-        }        
-        return allTheCards;
-    }
-    
-    /**
-     * Creates an ArrayList of cards with image
+     * Creates all the cards in the game with icons
      * @param rank
      * @param suit
      * @param allImages
-     * @return
+     * @param faceCard
+     * @param humanPlayerHand
+     * @return 
      */
-    public ArrayList<OldCard> createAllTheCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages){
-        
-        ArrayList<OldCard> allTheCards = new ArrayList<>();       
-        int cardNumber = 0;
-        for(int j=0; j<suit.length; j++){
-            for(int i=0; i<rank.length; i++){            
-                OldCard card = new OldCard(rank[i], suit[j], allImages.get(cardNumber));
-                allTheCards.add(card);
-                cardNumber++;
-            }            
-        }        
-        return allTheCards;
-    }
-    
-    //Create touchcard list
     public ArrayList<PlayerCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
             ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand){
         
@@ -91,5 +61,4 @@ public class Dealer {
             deck.add(allTheCards.get(j));
         }
     }
-    
 }

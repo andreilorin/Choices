@@ -1,7 +1,7 @@
 package app.app;
 
 import app.app.CommunityCard;
-import app.app.OldCard;
+//import app.app.OldCard;
 import app.app.Dealer;
 import app.app.PlayerCard;
 import app.app.ComputerCard;
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
 /**
- *  Game class
+ * Game class. This is where the game runs
  * @author Lorin
  */
 public class Table extends JFrame{
@@ -51,6 +51,7 @@ public class Table extends JFrame{
     }
     
     /**
+     * Constructor
      * Sets up the table and the cards
      */
     public Table(){        

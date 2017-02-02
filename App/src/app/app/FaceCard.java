@@ -13,6 +13,7 @@ public class FaceCard extends Card{
     
     /**
      * Constructor with handle to faceCardArray
+     * Adds MouseListener
      * @param faceCardArray 
      */
     public FaceCard(ArrayDeque<PlayerCard> faceCardArray){
@@ -51,32 +52,6 @@ public class FaceCard extends Card{
 
             @Override
             public void mouseExited(MouseEvent e) { }
-
         });
-        
-        //add mouse motion listener
-        addMouseMotionListener(new MouseMotionListener() {
-            
-            //Reposition based on the mouse location difference
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int deltaX = e.getXOnScreen() - screenX;
-                int deltaY = e.getYOnScreen() - screenY;
-
-                setLocation(myX + deltaX, myY + deltaY);
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) { }
-
-        });
-        
-    }
-        
+    }   
 }
-
-    
-
-    
-    
-

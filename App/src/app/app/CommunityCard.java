@@ -18,6 +18,7 @@ public class CommunityCard extends Card {
     
     /**
      * Constructor that gets a handle to the faceCard array and human card array
+     * Adds MouseListener
      * @param table
      * @param faceCard
      * @param playerHand
@@ -65,22 +66,6 @@ public class CommunityCard extends Card {
 
             @Override
             public void mouseExited(MouseEvent e) { }
-        });
-    
-        //add mouse motion listener
-        addMouseMotionListener(new MouseMotionListener() {
-            
-            //Reposition based on the mouse location difference
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int deltaX = e.getXOnScreen() - screenX;
-                int deltaY = e.getYOnScreen() - screenY;
-
-                setLocation(myX + deltaX, myY + deltaY);
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) { }
         });
     }
 }
