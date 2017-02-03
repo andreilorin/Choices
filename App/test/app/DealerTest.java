@@ -5,6 +5,9 @@
  */
 package app;
 
+import app.app.Card;
+import app.app.Dealer;
+import app.app.PlayerCard;
 import org.mockito.Mockito;
 
 import java.util.ArrayDeque;
@@ -26,11 +29,11 @@ public class DealerTest {
     
     private Dealer dealer;
     
-    private static ArrayList<Card> allTheCards;
-    private static ArrayList<Card> faceCard;
-    private static ArrayList<ArrayList<Card>> players;
-    private static ArrayDeque<Card> deck;
-    
+    private static ArrayList<PlayerCard> allTheCards;
+    private static ArrayDeque<PlayerCard> faceCard;
+    private static ArrayList<ArrayList<PlayerCard>> players;
+    private static ArrayDeque<PlayerCard> deck;
+    private static ArrayList<PlayerCard> humanPlayerHand;
     
     private static ArrayList<ImageIcon> allImages;
     
@@ -72,20 +75,7 @@ public class DealerTest {
     @After
     public void tearDown() {
         System.out.println("end of method test");
-    }
-
-    /**
-     * Test of createAllTheCards method, of class Dealer.
-     * Check if 52 cards have been created
-     */
-    @Test
-    public void testCreateAllTheCards_StringArr_StringArr() {
-        System.out.println("createAllTheCards() ");        
-               
-        ArrayList<Card> result = dealer.createAllTheCards(RANK, SUIT);        
-        
-        assertEquals(52, result.size());        
-    }
+    }    
 
     /**
      * Test of createAllTheCards method, of class Dealer.
@@ -95,7 +85,8 @@ public class DealerTest {
     public void testCreateAllTheCards_3args() {
         System.out.println("createAllTheCards()");
         
-        allTheCards = dealer.createAllTheCards(RANK, SUIT, allImages);
+        allTheCards = dealer.createAllTheTouchCards(RANK, SUIT, allImages, faceCard,
+                humanPlayerHand);
         assertEquals(52, allTheCards.size());        
     }
 
@@ -111,7 +102,7 @@ public class DealerTest {
         
         //declare captors
         ArgumentCaptor<ArrayList> arg = ArgumentCaptor.forClass(ArrayList.class);
-        ArgumentCaptor<ArrayList> arg1 = ArgumentCaptor.forClass(ArrayList.class);
+        ArgumentCaptor<ArrayDeque> arg1 = ArgumentCaptor.forClass(ArrayDeque.class);
         ArgumentCaptor<ArrayList> arg2 = ArgumentCaptor.forClass(ArrayList.class);
         ArgumentCaptor<ArrayDeque> arg3 = ArgumentCaptor.forClass(ArrayDeque.class);
                 
