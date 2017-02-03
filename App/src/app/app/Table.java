@@ -42,7 +42,7 @@ public class Table extends JFrame{
     static ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
         
     //ArrayDeque for ComunityCards
-    ArrayDeque<PlayerCard> communityCardsArray=  new ArrayDeque<>();    
+    ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();    
     
     //main method    
     public static void main(String[] args) {

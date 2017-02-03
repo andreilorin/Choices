@@ -41,7 +41,8 @@ public class Dealer {
      * @param players
      * @param deck
      */
-    public void deal(ArrayList<PlayerCard> allTheCards, ArrayDeque<PlayerCard> faceCard, ArrayList<ArrayList<PlayerCard>> players, ArrayDeque<PlayerCard>deck){          
+    public void deal(ArrayList<PlayerCard> allTheCards, ArrayDeque<PlayerCard> faceCard,
+            ArrayList<ArrayList<PlayerCard>> players, ArrayDeque<PlayerCard>deck){          
         
         for(int i=0; i<5; i++){
             for (ArrayList<PlayerCard> player : players) {                
@@ -60,5 +61,41 @@ public class Dealer {
         for(int j=0; j < allTheCards.size(); j++){
             deck.add(allTheCards.get(j));
         }
+    }
+    
+    public static void refillCommunityCards(ArrayDeque<PlayerCard> communityCardsArray,
+        ArrayDeque<PlayerCard> faceCardArray){
+                
+        ArrayList<PlayerCard> swapList = new ArrayList<>();
+             
+        
+        if(communityCardsArray.isEmpty()){
+            
+            System.out.println("refilling community cards");
+            for(int i=0; i<faceCardArray.size() - 1 ; i++){
+                swapList.add(faceCardArray.getFirst());
+            }
+            
+            for(int i=0; i<swapList.size() - 1 ; i++){
+                int random = (int)(Math.random() * swapList.size()); 
+                communityCardsArray.add(swapList.get(random));
+            }
+        }
+    }
+    
+    public static void findWinner(ArrayList<PlayerCard> computer1hand, ArrayList<PlayerCard> computer2hand,
+            ArrayList<PlayerCard> computer3hand, ArrayList<PlayerCard> playerHand){
+        
+        if(computer1hand.isEmpty()){
+            System.out.println("Player1 wins");
+        }
+        else if(computer2hand.isEmpty()){
+            System.out.println("Player2 wins");
+        }
+        else if(computer3hand.isEmpty()){
+            System.out.println("Player3 wins");
+        }
+        else if(playerHand.isEmpty())
+            System.out.println("You Win !");
     }
 }

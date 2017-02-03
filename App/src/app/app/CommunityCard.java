@@ -46,6 +46,8 @@ public class CommunityCard extends Card {
                 cc.setBorder(new LineBorder(Color.ORANGE, 3));
 
                 table.placePlayerCardsOnTable();
+                
+                Dealer.refillCommunityCards(communityCardsArray, faceCard);
             }
 
             //Record the position where the mouse was clicked for repositioning
