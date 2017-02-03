@@ -68,7 +68,6 @@ public class Dealer {
                 
         ArrayList<PlayerCard> swapList = new ArrayList<>();
              
-        
         if(communityCardsArray.isEmpty()){
             
             System.out.println("refilling community cards");

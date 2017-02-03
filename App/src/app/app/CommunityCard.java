@@ -3,11 +3,8 @@ package app.app;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**

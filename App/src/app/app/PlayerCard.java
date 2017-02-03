@@ -7,7 +7,6 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**

@@ -1,17 +1,9 @@
 package app.app;
 
-import app.app.CommunityCard;
-//import app.app.OldCard;
-import app.app.Dealer;
-import app.app.PlayerCard;
-import app.app.ComputerCard;
-import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
 
 /**
  * Game class. This is where the game runs
