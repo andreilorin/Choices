@@ -71,5 +71,15 @@ public abstract class Card extends JButton{
      */
     public static String[] getSUIT() {
         return SUIT;
-    }  
+    }
+
+    public int getMyX() {
+        return myX;
+    }
+
+    public int getMyY() {
+        return myY;
+    }
+    
+    
 }

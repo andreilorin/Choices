@@ -34,8 +34,10 @@ public class PlayerCard extends Card {
      * @param icon
      * @param faceCard
      * @param humanPlayerHand
+     * @param fc
      */
-    public PlayerCard(String rank, String suite, ImageIcon icon, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand) {
+    public PlayerCard(String rank, String suite, ImageIcon icon, ArrayDeque<PlayerCard> faceCard,
+            ArrayList<PlayerCard> humanPlayerHand) {
         
         this.rank = rank;
         this.suite = suite;
@@ -71,6 +73,20 @@ public class PlayerCard extends Card {
                 System.out.println("clicked on player card " + pc.getCardValues());                        
                       
                 pc.setBorder(new LineBorder(Color.BLACK, 3));
+                
+                //TODO*****************************************************
+                if(pc.getSuit().equals(faceCard.getFirst().getSuit())
+                        ){
+                    //add to faceCard array
+                    faceCard.add(pc);                    
+                    System.out.println("card moved");
+                    //set new Icon of the faceCard
+                    //fc.setIcon(pc.getCardIcon());
+                    //remoce the card from the player hand array
+                    humanPlayerHand.remove(pc);
+                    //set the card to invisible
+                    pc.setVisible(false);
+                }
             }
             
             //Record the position where the mouse was clicked for repositioning
@@ -134,7 +150,7 @@ public class PlayerCard extends Card {
      * Returns a String representation of the card's suite
      * @return String
      */
-    public String getSuite(){return this.suite;}
+    public String getSuit(){return this.suite;}
     
     /**
      * Return the card's icon

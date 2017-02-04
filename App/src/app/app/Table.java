@@ -65,6 +65,8 @@ public class Table extends JFrame{
         //instantiate dealer
         dealer = new Dealer();
         
+        //FaceCard faceCard = new FaceCard(faceCardArray);
+        
         //create and add all the cards to the array
         allTheCards = dealer.createAllTheTouchCards(Card.getRANK(), Card.getSUIT(), 
                 allImages, faceCardArray, playerHand);// 
@@ -83,7 +85,7 @@ public class Table extends JFrame{
         CommunityCard communityCard = new CommunityCard(this, faceCardArray, 
                 playerHand, communityCardsArray);
         
-        //create CardtoFaceCard  for faceCArd
+        //create CardtoFaceCard  for faceCard
         FaceCard faceCard = new FaceCard(faceCardArray);
         
         //create ComputerCard for computer1
