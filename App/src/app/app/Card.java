@@ -1,6 +1,7 @@
 package app.app;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
@@ -12,6 +13,14 @@ import javax.swing.border.LineBorder;
  * @author Lorin 
  */
 public abstract class Card extends JButton{
+    
+    //Create locations for the players
+    public final static Point computer1Location = new Point(0, 200);
+    public final static Point computer2Location = new Point(450, 0);
+    public final static Point computer3Location = new Point(870, 150);
+    public final static Point faceCardLocation = new Point(350, 200);
+    public final static Point communityCardLocation = new Point(550, 200);
+    
     //Fields
     public volatile int screenX = 0;
     public volatile int screenY = 0;

@@ -1,5 +1,6 @@
 package app.app;
 
+import java.awt.Point;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -34,7 +35,7 @@ public class Table extends JFrame{
     static ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
         
     //ArrayDeque for ComunityCards
-    ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();    
+    ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
     
     //main method    
     public static void main(String[] args) {
@@ -86,23 +87,23 @@ public class Table extends JFrame{
                 playerHand, communityCardsArray);
         
         //create CardtoFaceCard  for faceCard
-        FaceCard faceCard = new FaceCard(faceCardArray);
+        //FaceCard faceCard = new FaceCard(faceCardArray); remove ????**********
         
         //create ComputerCard for computer1
-        ComputerCard computer1 = new ComputerCard();               
-        computer1.setLocation(0, 200);
+        ComputerCard computer1 = new ComputerCard();
+        computer1.setLocation(Card.computer1Location);
         
         //create ComputerCard for computer2        
         ComputerCard computer2 = new ComputerCard();         
-        computer2.setLocation(450, 0);
+        computer2.setLocation(Card.computer2Location);
         
         //create ComputerCard for computer3   
         ComputerCard computer3 = new ComputerCard();
-        computer3.setLocation(870, 150); 
+        computer3.setLocation(Card.computer3Location); 
         
         //add communityCard, faceCard and computer cards to the table
         this.add(communityCard);
-        this.add(faceCard);
+        //this.add(faceCard);////////remove this*****************************???
         this.add(computer1);
         this.add(computer2);
         this.add(computer3);
@@ -130,10 +131,17 @@ public class Table extends JFrame{
             
             card.setIcon(card.getCardIcon());          
            
-            card.setLocation(playerX, 400);
+            card.setLocation(playerX, 400);            
             
             playerX -= aaa;
             
+            this.add(card);
+        }
+        
+        for(PlayerCard card: faceCardArray){
+            
+            card.setIcon(card.getCardIcon());
+            card.setLocation(Card.faceCardLocation);
             this.add(card);
         }
     }

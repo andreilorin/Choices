@@ -71,13 +71,15 @@ public class Dealer {
         if(communityCardsArray.isEmpty()){
             
             System.out.println("refilling community cards");
-            for(int i=0; i<faceCardArray.size() - 1 ; i++){
+            for(int i=0; i<faceCardArray.size(); i++){
                 swapList.add(faceCardArray.getFirst());
             }
             
-            for(int i=0; i<swapList.size() - 1 ; i++){
-                int random = (int)(Math.random() * swapList.size()); 
-                communityCardsArray.add(swapList.get(random));
+            for(int i=0; i<swapList.size(); i++){
+                //int random = (int)(Math.random() * swapList.size()); 
+                //communityCardsArray.add(swapList.get(random));
+                
+                communityCardsArray.add(swapList.get(i));
             }
         }
     }
@@ -96,5 +98,9 @@ public class Dealer {
         }
         else if(playerHand.isEmpty())
             System.out.println("You Win !");
+    }
+    
+    public static void updateFaceCardImage(FaceCard fc, ArrayDeque<PlayerCard> faceCard){
+        fc.setIcon(faceCard.getLast().getCardIcon());
     }
 }

@@ -24,7 +24,7 @@ public class CommunityCard extends Card {
     public CommunityCard(Table table, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> playerHand, ArrayDeque<PlayerCard> communityCardsArray) {
                 
         //settings
-        setLocation(550, 200);
+        setLocation(Card.communityCardLocation);
         
         //add mouse listener
         addMouseListener(new MouseListener() {

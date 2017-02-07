@@ -73,10 +73,23 @@ public class PlayerCard extends Card {
                 System.out.println("clicked on player card " + pc.getCardValues());                        
                       
                 pc.setBorder(new LineBorder(Color.BLACK, 3));
+            
+                //////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////
+                
+                System.out.println("faceCard");
+                for(PlayerCard card : faceCard){
+                    System.out.println(card.getRank());
+                }
+                System.out.println("humanplayer");
+                for(PlayerCard card : humanPlayerHand){
+                    System.out.println(card.getRank());
+                }
                 
                 //TODO*****************************************************
-                if(pc.getSuit().equals(faceCard.getFirst().getSuit())
-                        ){
+                if(pc.getSuit().equals(faceCard.getFirst().getSuit()) ||
+                       pc.getRank().equals(faceCard.getFirst().getRank()) ){
                     //add to faceCard array
                     faceCard.add(pc);                    
                     System.out.println("card moved");
@@ -85,8 +98,24 @@ public class PlayerCard extends Card {
                     //remoce the card from the player hand array
                     humanPlayerHand.remove(pc);
                     //set the card to invisible
-                    pc.setVisible(false);
+                    pc.setLocation(0, 0);
+                    
+                    //Dealer.updateFaceCardImage(fc, faceCard);
                 }
+                
+                System.out.println("********************************");
+                System.out.println("faceCard");
+                for(PlayerCard card : faceCard){
+                    System.out.println(card.getRank() + " of " + card.getSuit());
+                }
+                System.out.println("human");
+                for(PlayerCard card : humanPlayerHand){
+                    System.out.println(card.getRank() + " of " + card.getSuit());
+                }
+                
+                ////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////
             }
             
             //Record the position where the mouse was clicked for repositioning
