@@ -1,9 +1,12 @@
 package app.app;
 
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -69,7 +72,7 @@ public class Table extends JFrame{
         //FaceCard faceCard = new FaceCard(faceCardArray);
         
         //create and add all the cards to the array
-        allTheCards = dealer.createAllTheTouchCards(Card.getRANK(), Card.getSUIT(), 
+        allTheCards = dealer.createAllTheTouchCards(Card.RANK, Card.SUIT, 
                 allImages, faceCardArray, playerHand);// 
         
         //add players array to one array
@@ -91,15 +94,15 @@ public class Table extends JFrame{
         
         //create ComputerCard for computer1
         ComputerCard computer1 = new ComputerCard();
-        computer1.setLocation(Card.computer1Location);
+        computer1.setLocation(Card.COMPUTER1LOCATION);
         
         //create ComputerCard for computer2        
         ComputerCard computer2 = new ComputerCard();         
-        computer2.setLocation(Card.computer2Location);
+        computer2.setLocation(Card.COMPUTER2LOCATION);
         
         //create ComputerCard for computer3   
         ComputerCard computer3 = new ComputerCard();
-        computer3.setLocation(Card.computer3Location); 
+        computer3.setLocation(Card.COMPUTER3LOCATION); 
         
         //add communityCard, faceCard and computer cards to the table
         this.add(communityCard);
@@ -108,8 +111,36 @@ public class Table extends JFrame{
         this.add(computer2);
         this.add(computer3);
         
+        //create button
+        JButton rearangeCards = new JButton("Rearange");
+        rearangeCards.setLocation(0, 0);
+        rearangeCards.setSize(150, 50);
+        rearangeCards.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                placeCardsOnTable();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+            
+        });
+        rearangeCards.setVisible(true);
+        
+        this.add(rearangeCards);
+        
+        
         //add plater cards on table
-        placePlayerCardsOnTable();
+        placeCardsOnTable();
         
         //frame settings
         this.setSize(1000, 600);
@@ -123,7 +154,7 @@ public class Table extends JFrame{
     /**
      * Adds all the cards from the humanPlayerHand array to the table
      */    
-    public void placePlayerCardsOnTable(){        
+    public void placeCardsOnTable(){        
         int playerX = 700;
         int aaa = 600/playerHand.size(); 
         
@@ -141,7 +172,28 @@ public class Table extends JFrame{
         for(PlayerCard card: faceCardArray){
             
             card.setIcon(card.getCardIcon());
-            card.setLocation(Card.faceCardLocation);
+            card.setLocation(Card.FACECARDLOCATION);
+            this.add(card);
+        }
+        
+        for(PlayerCard card: computer1hand){
+            
+            card.setIcon(card.getCardIcon());
+            card.setLocation(Card.COMPUTER1LOCATION);
+            this.add(card);
+        }
+        
+        for(PlayerCard card: computer2hand){
+            
+            card.setIcon(card.getCardIcon());
+            card.setLocation(Card.COMPUTER2LOCATION);
+            this.add(card);
+        }
+        
+        for(PlayerCard card: computer3hand){
+            
+            card.setIcon(card.getCardIcon());
+            card.setLocation(Card.COMPUTER3LOCATION);
             this.add(card);
         }
     }

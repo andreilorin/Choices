@@ -15,11 +15,11 @@ import javax.swing.border.LineBorder;
 public abstract class Card extends JButton{
     
     //Create locations for the players
-    public final static Point computer1Location = new Point(0, 200);
-    public final static Point computer2Location = new Point(450, 0);
-    public final static Point computer3Location = new Point(870, 150);
-    public final static Point faceCardLocation = new Point(350, 200);
-    public final static Point communityCardLocation = new Point(550, 200);
+    public final static Point COMPUTER1LOCATION = new Point(0, 200);
+    public final static Point COMPUTER2LOCATION = new Point(450, 0);
+    public final static Point COMPUTER3LOCATION = new Point(870, 150);
+    public final static Point FACECARDLOCATION = new Point(350, 200);
+    public final static Point COMMUNITYDCARDLOCATION = new Point(550, 200);
     
     //Fields
     public volatile int screenX = 0;
@@ -27,8 +27,8 @@ public abstract class Card extends JButton{
     public volatile int myX = 0;
     public volatile int myY = 0;
     
-    private static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    private static final String[] SUIT = {"club", "diamond", "heart", "spade"};
+    protected static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    protected static final String[] SUIT = {"club", "diamond", "heart", "spade"};
     
     public final ImageIcon backOfTheCard = new ImageIcon("C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\deckcard.png");
 
@@ -64,22 +64,6 @@ public abstract class Card extends JButton{
             public void mouseMoved(MouseEvent e) { }
 
         });  
-    }
-
-    /**
-     * Returns RANK
-     * @return String[]
-     */
-    public static String[] getRANK() {
-        return RANK;
-    }
-
-    /**
-     * Returns SUIT
-     * @return String[]
-     */
-    public static String[] getSUIT() {
-        return SUIT;
     }
 
     public int getMyX() {

@@ -24,7 +24,7 @@ public class CommunityCard extends Card {
     public CommunityCard(Table table, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> playerHand, ArrayDeque<PlayerCard> communityCardsArray) {
                 
         //settings
-        setLocation(Card.communityCardLocation);
+        setLocation(Card.COMMUNITYDCARDLOCATION);
         
         //add mouse listener
         addMouseListener(new MouseListener() {
@@ -42,7 +42,7 @@ public class CommunityCard extends Card {
                                 
                 cc.setBorder(new LineBorder(Color.ORANGE, 3));
 
-                table.placePlayerCardsOnTable();
+                table.placeCardsOnTable();
                 
                 Dealer.refillCommunityCards(communityCardsArray, faceCard);
             }
