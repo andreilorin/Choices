@@ -68,7 +68,9 @@ public class PlayerCard extends Card {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //Get the source of the event                
-                PlayerCard pc = (PlayerCard)e.getSource();                
+                PlayerCard pc = (PlayerCard)e.getSource();
+
+                //textArea.append("Click on a " + pc.getRank);
                
                 System.out.println("clicked on player card " + pc.getCardValues());                        
                       
