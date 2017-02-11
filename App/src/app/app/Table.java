@@ -88,33 +88,7 @@ public class Table extends JFrame{
         
         //deal the cards
         dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
-        
-        //create CardtoCommunityCard for comunityCard
-        CommunityCard communityCard = new CommunityCard(this, faceCardArray, 
-                playerHand, communityCardsArray);
-        
-        //create CardtoFaceCard  for faceCard
-        //FaceCard faceCard = new FaceCard(faceCardArray); remove ????**********
-        
-        //create ComputerCard for computer1
-        ComputerCard computer1 = new ComputerCard();
-        computer1.setLocation(Card.COMPUTER1LOCATION);
-        
-        //create ComputerCard for computer2        
-        ComputerCard computer2 = new ComputerCard();         
-        computer2.setLocation(Card.COMPUTER2LOCATION);
-        
-        //create ComputerCard for computer3   
-        ComputerCard computer3 = new ComputerCard();
-        computer3.setLocation(Card.COMPUTER3LOCATION); 
-        
-        //add communityCard, faceCard and computer cards to the table
-        this.add(communityCard);
-        //this.add(faceCard);////////remove this*****************************???
-        this.add(computer1);
-        this.add(computer2);
-        this.add(computer3);
-        
+                
         //add text area
         JTextArea textArea = new JTextArea();
         textArea.setLocation(300, 600);
@@ -130,7 +104,7 @@ public class Table extends JFrame{
         rearangeCards.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                rearangeCards();
+                rearrangeCards();
                 textArea.append("\nrearanging cards");
             }
 
@@ -158,7 +132,7 @@ public class Table extends JFrame{
         rearangeCards2.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                rearangeCards();
+                rearrangeCards();
                 textArea.append("\nr2");
             }
 
@@ -174,7 +148,8 @@ public class Table extends JFrame{
         rearangeCards2.setVisible(true);        
         this.add(rearangeCards2);
         
-        //add all the cards on the table
+        //add all the cards on the table        
+        placeDummyCards();
         placeCardsOnTable();
         
         //textArea message
@@ -196,12 +171,12 @@ public class Table extends JFrame{
      */    
     public void placeCardsOnTable(){        
         int playerX = 700;
-        int aaa = 600/playerHand.size(); 
+        int location = 600/playerHand.size(); 
         
         for(PlayerCard card: playerHand){
             card.setIcon(card.getCardIcon());           
             card.setLocation(playerX, 400);  
-            playerX -= aaa;
+            playerX -= location;
             this.add(card);
         }
         
@@ -233,14 +208,38 @@ public class Table extends JFrame{
             card.setIcon(card.getCardIcon());
             card.setLocation(Card.COMMUNITYDCARDLOCATION);
             this.add(card);
-        }
+        }       
+    }
+    
+    public void placeDummyCards(){
+       //create ComputerCard for computer2        
+        ComputerCard computer1 = new ComputerCard();         
+        computer1.setLocation(Card.COMPUTER1LOCATION);
+        
+        //create ComputerCard for computer2        
+        ComputerCard computer2 = new ComputerCard();         
+        computer2.setLocation(Card.COMPUTER2LOCATION);
+        
+        //create ComputerCard for computer3   
+        ComputerCard computer3 = new ComputerCard();
+        computer3.setLocation(Card.COMPUTER3LOCATION);
+        
+        //create CommunityCard
+        CommunityCard communityCard = new CommunityCard(this, faceCardArray, 
+                playerHand, communityCardsArray);
+        
+        //add communityCard and computer cards to the table
+        this.add(computer1);        
+        this.add(computer2);
+        this.add(computer3);
+        this.add(communityCard);
     }
     
     /**
-     * Rearanges the cards on the table(they can get rearanged in random order
+     * Rearranges the cards on the table(they can get rearranged in random order
      * but the cards keep their order in the array they belong to)
      */
-    public void rearangeCards(){        
+    public void rearrangeCards(){        
         int playerX = 700;
         int aaa = 600/playerHand.size(); 
         
