@@ -53,7 +53,8 @@ public class Table extends JFrame{
      * Constructor
      * Sets up the table and the cards
      */
-    public Table(){        
+    public Table(){   
+               
         this.setLayout(null);        
         
         //add images to to allImages ArrayList
@@ -129,7 +130,7 @@ public class Table extends JFrame{
         rearangeCards.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                placeCardsOnTable();
+                rearangeCards();
                 textArea.append("\nrearanging cards");
             }
 
@@ -157,7 +158,7 @@ public class Table extends JFrame{
         rearangeCards2.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                placeCardsOnTable();
+                rearangeCards();
                 textArea.append("\nr2");
             }
 
@@ -177,7 +178,7 @@ public class Table extends JFrame{
         placeCardsOnTable();
         
         //textArea message
-        textArea.setText("Click on a " + faceCardArray.getFirst().getRank() + 
+        textArea.setText("Click on a " + faceCardArray.getLast().getRank() + 
                 " or a " + faceCardArray.getFirst().getSuit());
         
         //frame settings
@@ -205,7 +206,7 @@ public class Table extends JFrame{
         }
         
         for(PlayerCard card: faceCardArray){
-            card.setIcon(card.getCardIcon());
+            card.setIcon(faceCardArray.getLast().getCardIcon());
             card.setLocation(Card.FACECARDLOCATION);
             this.add(card);
         }
@@ -232,6 +233,40 @@ public class Table extends JFrame{
             card.setIcon(card.getCardIcon());
             card.setLocation(Card.COMMUNITYDCARDLOCATION);
             this.add(card);
+        }
+    }
+    
+    /**
+     * Rearanges the cards on the table(they can get rearanged in random order
+     * but the cards keep their order in the array they belong to)
+     */
+    public void rearangeCards(){        
+        int playerX = 700;
+        int aaa = 600/playerHand.size(); 
+        
+        for(PlayerCard card: playerHand){          
+            card.setLocation(playerX, 400);  
+            playerX -= aaa;           
+        }
+       
+        for(PlayerCard card: faceCardArray){            
+            card.setLocation(Card.FACECARDLOCATION);
+        }
+        
+        for(PlayerCard card: computer1hand){
+            card.setLocation(Card.COMPUTER1LOCATION);
+        }
+        
+        for(PlayerCard card: computer2hand){
+            card.setLocation(Card.COMPUTER2LOCATION);
+        }
+        
+        for(PlayerCard card: computer3hand){            
+            card.setLocation(Card.COMPUTER3LOCATION);
+        }
+        
+        for(PlayerCard card: communityCardsArray){            
+            card.setLocation(Card.COMMUNITYDCARDLOCATION);
         }
     }
 }

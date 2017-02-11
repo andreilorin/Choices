@@ -42,7 +42,7 @@ public class CommunityCard extends Card {
                                 
                 cc.setBorder(new LineBorder(Color.ORANGE, 3));
 
-                table.placeCardsOnTable();
+                table.rearangeCards();
                 
                 Dealer.refillCommunityCards(communityCardsArray, faceCard);
             }

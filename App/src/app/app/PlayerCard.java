@@ -100,7 +100,7 @@ public class PlayerCard extends Card {
                     //remoce the card from the player hand array
                     humanPlayerHand.remove(pc);
                     //set the card to invisible
-                    pc.setLocation(0, 0);
+                    pc.setLocation(Card.FACECARDLOCATION);
                     
                     //Dealer.updateFaceCardImage(fc, faceCard);
                 }
