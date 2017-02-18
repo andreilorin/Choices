@@ -1,15 +1,14 @@
 package app.app;
 
-import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -18,7 +17,13 @@ import javax.swing.JTextArea;
  */
 public class Table extends JFrame{
     
-    private Dealer dealer;   
+    private Dealer dealer;
+    
+    //field to display image of the face card
+    public FaceCard faceCard;
+    
+    //field for text Area
+    JTextArea textArea;
    
     //Array to load all the images
     ArrayList<ImageIcon> allImages = new ArrayList<>(); 
@@ -77,7 +82,7 @@ public class Table extends JFrame{
         
         //create and add all the cards to the array
         allTheCards = dealer.createAllTheTouchCards(Card.RANK, Card.SUIT, 
-                allImages, faceCardArray, playerHand);// 
+                allImages, faceCardArray, playerHand, this);// 
         
         //add players array to one array
         allPlayers.add(computer1hand);
@@ -89,15 +94,15 @@ public class Table extends JFrame{
         //deal the cards
         dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
                 
-        //add text area
-        JTextArea textArea = new JTextArea();
+        //add text area       
+        textArea = new JTextArea();            
         textArea.setLocation(300, 600);
         textArea.setSize(400, 100);
         textArea.setVisible(true);
-        textArea.setEditable(false);
+        textArea.setEditable(true);
         this.add(textArea);
         
-        //create button for reaarenge
+        //create button for rearenge
         JButton rearangeCards = new JButton("Rearange");
         rearangeCards.setLocation(0, 0);
         rearangeCards.setSize(150, 50);
@@ -148,12 +153,15 @@ public class Table extends JFrame{
         rearangeCards2.setVisible(true);        
         this.add(rearangeCards2);
         
-        //add all the cards on the table        
+        //add all the cards on the table
+        //logger.info("placing dummy cards");
         placeDummyCards();
+        
+        //logger.info("placing cards");
         placeCardsOnTable();
         
         //textArea message
-        textArea.setText("Click on a " + faceCardArray.getLast().getRank() + 
+        textArea.setText("Click on " + faceCardArray.getLast().getRank() + 
                 " or a " + faceCardArray.getFirst().getSuit());
         
         //frame settings
@@ -228,11 +236,15 @@ public class Table extends JFrame{
         CommunityCard communityCard = new CommunityCard(this, faceCardArray, 
                 playerHand, communityCardsArray);
         
+        //create FaceCard
+        faceCard = new FaceCard(faceCardArray);
+        
         //add communityCard and computer cards to the table
         this.add(computer1);        
         this.add(computer2);
         this.add(computer3);
         this.add(communityCard);
+        this.add(faceCard);
     }
     
     /**
@@ -267,5 +279,21 @@ public class Table extends JFrame{
         for(PlayerCard card: communityCardsArray){            
             card.setLocation(Card.COMMUNITYDCARDLOCATION);
         }
+    }
+    
+    public void checkForWinner(Collection hand, String winner, String message ){
+        if(hand.isEmpty()){
+            JOptionPane.showMessageDialog(null, winner, "InfoBox: " + message, JOptionPane.INFORMATION_MESSAGE);
+        }        
+    }
+    
+    public void computerAI(ArrayList<PlayerCard> computer1hand,ArrayList<PlayerCard> computer2hand,
+            ArrayList<PlayerCard> computer3hand, ArrayDeque<PlayerCard> faceCardArray,
+            ArrayDeque<PlayerCard> communityCardsArray, ArrayList<PlayerCard> playerHand){
+        
+        PlayerCard cardToPlace = faceCardArray.getLast();
+        
+        checkForWinner(playerHand, "Human Player Wins" ,"CONGRATULATIONS YOU ARE THE WINNER !");
+                        
     }
 }

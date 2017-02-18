@@ -17,16 +17,17 @@ public class Dealer {
      * @param allImages
      * @param faceCard
      * @param humanPlayerHand
+     * @param table
      * @return 
      */
     public ArrayList<PlayerCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
-            ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand){
+            ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand, Table table){
         
         ArrayList<PlayerCard> allTheCards = new ArrayList<>();       
         int cardNumber = 0;
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
-                PlayerCard card = new PlayerCard(rank[i], suit[j], allImages.get(cardNumber), faceCard, humanPlayerHand);
+                PlayerCard card = new PlayerCard(rank[i], suit[j], allImages.get(cardNumber), faceCard, humanPlayerHand, table);
                 allTheCards.add(card);
                 cardNumber++;
             }            

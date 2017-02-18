@@ -34,10 +34,11 @@ public class PlayerCard extends Card {
      * @param icon
      * @param faceCard
      * @param humanPlayerHand
-     * @param fc
+     * @param table
      */
-    public PlayerCard(String rank, String suite, ImageIcon icon, ArrayDeque<PlayerCard> faceCard,
-            ArrayList<PlayerCard> humanPlayerHand) {
+    public PlayerCard(String rank, String suite, ImageIcon icon, 
+            ArrayDeque<PlayerCard> faceCard,
+            ArrayList<PlayerCard> humanPlayerHand, Table table) {
         
         this.rank = rank;
         this.suite = suite;
@@ -69,30 +70,18 @@ public class PlayerCard extends Card {
             public void mouseClicked(MouseEvent e) {
                 //Get the source of the event                
                 PlayerCard pc = (PlayerCard)e.getSource();
-
-                //textArea.append("Click on a " + pc.getRank);
-               
+                                              
                 System.out.println("clicked on player card " + pc.getCardValues());                        
                       
                 pc.setBorder(new LineBorder(Color.BLACK, 3));
-            
-                //////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////
-                
-                System.out.println("faceCard");
-                for(PlayerCard card : faceCard){
-                    System.out.println(card.getRank());
-                }
-                System.out.println("humanplayer");
-                for(PlayerCard card : humanPlayerHand){
-                    System.out.println(card.getRank());
-                }
                 
                 //TODO*****************************************************
-                if(pc.getSuit().equals(faceCard.getFirst().getSuit()) ||
-                       pc.getRank().equals(faceCard.getFirst().getRank()) ){
+                if(pc.getSuit().equals(faceCard.getLast().getSuit()) ||
+                       pc.getRank().equals(faceCard.getLast().getRank())){
                     //add to faceCard array
+                    table.faceCard.setIcon(pc.getCardIcon());
+                    table.textArea.append("\nclick on " + pc.getRank() + " or " +
+                            pc.getSuit());
                     faceCard.add(pc);                    
                     System.out.println("card moved");
                     //set new Icon of the faceCard
@@ -101,6 +90,7 @@ public class PlayerCard extends Card {
                     humanPlayerHand.remove(pc);
                     //set the card to invisible
                     pc.setLocation(Card.FACECARDLOCATION);
+                    
                     
                     //Dealer.updateFaceCardImage(fc, faceCard);
                 }
