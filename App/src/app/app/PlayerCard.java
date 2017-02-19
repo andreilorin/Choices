@@ -24,7 +24,9 @@ public class PlayerCard extends Card {
             value;
     
     private ImageIcon
-            icon;    
+            icon;
+
+    private static int roundNumber = 2;        
     
     /**
      * Constructor that gives a handle to faceCard and humanPlayerHand arrays
@@ -78,36 +80,32 @@ public class PlayerCard extends Card {
                 //TODO*****************************************************
                 if(pc.getSuit().equals(faceCard.getLast().getSuit()) ||
                        pc.getRank().equals(faceCard.getLast().getRank())){
+                    
+                    //check for winner
+                    table.checkForWinner(humanPlayerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
+                    
                     //add to faceCard array
                     table.faceCard.setIcon(pc.getCardIcon());
-                    table.textArea.append("\nclick on " + pc.getRank() + " or " +
-                            pc.getSuit());
+                    table.textArea.append("\nclick on " + pc.getRank() + " or " + pc.getSuit());
+                    pc.setLocation(Card.FACECARDLOCATION);
                     faceCard.add(pc);                    
                     System.out.println("card moved");
-                    //set new Icon of the faceCard
-                    //fc.setIcon(pc.getCardIcon());
-                    //remoce the card from the player hand array
+                    
                     humanPlayerHand.remove(pc);
-                    //set the card to invisible
-                    pc.setLocation(Card.FACECARDLOCATION);
                     
                     
-                    //Dealer.updateFaceCardImage(fc, faceCard);
-                }
-                
-                System.out.println("********************************");
-                System.out.println("faceCard");
-                for(PlayerCard card : faceCard){
-                    System.out.println(card.getRank() + " of " + card.getSuit());
-                }
-                System.out.println("human");
-                for(PlayerCard card : humanPlayerHand){
-                    System.out.println(card.getRank() + " of " + card.getSuit());
-                }
-                
-                ////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////
+                    
+                    table.textArea.append(table.assistant.updateCardNumbers(table));
+                    table.assistant.ta.append("\nRound " + roundNumber + " click on " +
+                            faceCard.getLast().getRank() + " or " + faceCard.getLast().getSuit());
+                   
+                    roundNumber++;
+                    
+                    table.computerAI(table.computer1hand, table.faceCardArray, table.communityCardsArray);
+                    table.checkForWinner(table.computer1hand, "Computer 1 Wins","YOU LOST !");
+                    table.checkForWinner(table.computer2hand, "Computer 1 Wins","YOU LOST !");
+                    table.checkForWinner(table.computer3hand, "Computer 1 Wins","YOU LOST !"); 
+                }                            
             }
             
             //Record the position where the mouse was clicked for repositioning
@@ -122,10 +120,8 @@ public class PlayerCard extends Card {
 
             @Override
             public void mouseReleased(MouseEvent e) { }
-
             @Override
             public void mouseEntered(MouseEvent e) { }
-
             @Override
             public void mouseExited(MouseEvent e) { }
 
@@ -133,7 +129,6 @@ public class PlayerCard extends Card {
     
         //Add mouse motion listener
         addMouseMotionListener(new MouseMotionListener() {
-            
             //Reposition based on the mouse location difference
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -142,7 +137,6 @@ public class PlayerCard extends Card {
 
                 setLocation(myX + deltaX, myY + deltaY);
             }
-
             @Override
             public void mouseMoved(MouseEvent e) { }
 
