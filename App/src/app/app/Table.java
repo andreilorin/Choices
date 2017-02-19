@@ -1,15 +1,19 @@
 package app.app;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 /**
  * Game class. This is where the game runs
@@ -17,10 +21,19 @@ import javax.swing.JTextArea;
  */
 public class Table extends JFrame{
     
+    //Dealer
     private Dealer dealer;
     
+    //Computer player hands
+    ComputerCard computer1;
+    ComputerCard computer2;
+    ComputerCard computer3;
+    
+    //assistant
+    Assistant assistant;
+    
     //field to display image of the face card
-    public FaceCard faceCard;
+    FaceCard faceCard;
     
     //field for text Area
     JTextArea textArea;
@@ -37,21 +50,20 @@ public class Table extends JFrame{
     ArrayList<PlayerCard> computer3hand = new ArrayList<>();
     
     //ArrayList for human player
-    static ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
+    ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
     
     //ArrayList of players AL
     ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
             
     //ArrayList for faceCard
-    static ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
+    ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
         
     //ArrayDeque for ComunityCards
     ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
     
     //main method    
-    public static void main(String[] args) {
-        
-        new Table();         
+    public static void main(String[] args) {        
+        new Table();
     }
     
     /**
@@ -131,14 +143,15 @@ public class Table extends JFrame{
         this.add(rearangeCards);
         
         //create second button
-        JButton rearangeCards2 = new JButton("Rearange2");
+        JButton rearangeCards2 = new JButton("Assistant");
         rearangeCards2.setLocation(200, 0);
         rearangeCards2.setSize(150, 50);        
         rearangeCards2.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                rearrangeCards();
-                textArea.append("\nr2");
+                Assistant a = new Assistant(Table.this);//******************************************why not just table ?
+                a.run();
+                textArea.append("Created new Assistant");
             }
 
             @Override
@@ -170,7 +183,10 @@ public class Table extends JFrame{
         this.setTitle("Choices");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
-        this.setVisible(true);       
+        this.setVisible(true); 
+        
+        assistant = new Assistant(this);
+        assistant.run();
     }
     
     /**
@@ -221,15 +237,15 @@ public class Table extends JFrame{
     
     public void placeDummyCards(){
        //create ComputerCard for computer2        
-        ComputerCard computer1 = new ComputerCard();         
+        computer1 = new ComputerCard();         
         computer1.setLocation(Card.COMPUTER1LOCATION);
         
         //create ComputerCard for computer2        
-        ComputerCard computer2 = new ComputerCard();         
+        computer2 = new ComputerCard();         
         computer2.setLocation(Card.COMPUTER2LOCATION);
         
         //create ComputerCard for computer3   
-        ComputerCard computer3 = new ComputerCard();
+        computer3 = new ComputerCard();
         computer3.setLocation(Card.COMPUTER3LOCATION);
         
         //create CommunityCard
@@ -281,19 +297,124 @@ public class Table extends JFrame{
         }
     }
     
-    public void checkForWinner(Collection hand, String winner, String message ){
+    public void checkForWinner(Collection hand, String message, String winner ){
         if(hand.isEmpty()){
-            JOptionPane.showMessageDialog(null, winner, "InfoBox: " + message, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, winner, message, JOptionPane.INFORMATION_MESSAGE);
         }        
+    }   
+    
+    PlayerCard cardToMoveArround;
+    
+    //The computerAI method uses Iterator to prevent ConcurrentModificationException
+    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayDeque<PlayerCard> faceCardArray,
+            ArrayDeque<PlayerCard> communityCardsArray){
+        
+        //Computer1 
+        Iterator<PlayerCard> iterator1 = computer1hand.iterator();
+        
+        while(iterator1.hasNext()){
+            PlayerCard card1 = iterator1.next();
+            if(card1.getRank().equals(faceCardArray.getLast().getRank()) || 
+                    card1.getSuit().equals(faceCardArray.getLast().getSuit())){                
+                faceCard.setIcon(card1.getCardIcon());
+                faceCardArray.add(card1);                
+                computer1hand.remove(card1);                
+                break;
+            }
+//            if(!card1.getRank().equals(faceCardArray.getLast().getRank()) && 
+//                    !card1.getSuit().equals(faceCardArray.getLast().getSuit())){
+//                computer1hand.add(communityCardsArray.pollFirst());
+//            } 
+        }
+        //Computer2
+//        Iterator<PlayerCard> iterator2 = computer2hand.iterator();
+//        
+//        while(iterator2.hasNext()){
+//            PlayerCard card = iterator2.next();
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                faceCard.setIcon(card.getCardIcon());
+//                faceCardArray.add(card);                
+//                computer2hand.remove(card);                
+//                break;
+//            }else{
+//                computer1hand.add(communityCardsArray.pollFirst());
+//            }
+//        }
+//        //Computer3
+//        Iterator<PlayerCard> iterator3 = computer3hand.iterator();
+//        
+//        while(iterator3.hasNext()){
+//            PlayerCard card = iterator3.next();
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                faceCard.setIcon(card.getCardIcon());
+//                faceCardArray.add(card);                
+//                computer3hand.remove(card);                
+//                break;
+//            }else{
+//                computer1hand.add(communityCardsArray.pollFirst());
+//            }
+//        }
+        
     }
     
-    public void computerAI(ArrayList<PlayerCard> computer1hand,ArrayList<PlayerCard> computer2hand,
-            ArrayList<PlayerCard> computer3hand, ArrayDeque<PlayerCard> faceCardArray,
-            ArrayDeque<PlayerCard> communityCardsArray, ArrayList<PlayerCard> playerHand){
+//    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayDeque<PlayerCard> faceCardArray,
+//            ArrayDeque<PlayerCard> communityCardsArray){
+//                        
+//        for(PlayerCard card : computer1hand){
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                //faceCard.setIcon(card.getCardIcon());
+//                
+//                cardToMoveArround = card;
+//                
+//                break;
+//            }else{
+//                computer1hand.add(communityCardsArray.pollFirst());
+//            }
+//        }
+//        faceCard.setIcon(cardToMoveArround.getCardIcon());
+//        faceCardArray.add(cardToMoveArround);                
+//        computer1hand.remove(cardToMoveArround);
+//    }
+
+
+    
+//    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayList<PlayerCard> computer2hand,
+//            ArrayList<PlayerCard> computer3hand, ArrayDeque<PlayerCard> faceCardArray, ArrayDeque<PlayerCard> communityCardsArray){
+//        
+//        for(PlayerCard card : computer1hand)
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                faceCard.setIcon(card.getCardIcon());
+//                faceCardArray.add(card);                
+//                computer1hand.remove(card);                
+//                break;
+//            }else{
+//                computer1hand.add(communityCardsArray.pollFirst());
+//            }
         
-        PlayerCard cardToPlace = faceCardArray.getLast();
+//        for(PlayerCard card : computer2hand)
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                faceCard.setIcon(card.getCardIcon());
+//                faceCardArray.add(card);                
+//                computer2hand.remove(card);
+//                break;
+//            }else{
+//                computer2hand.add(communityCardsArray.pollFirst());
+//            }
+//        
+//        for(PlayerCard card : computer3hand)
+//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
+//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
+//                faceCard.setIcon(card.getCardIcon());
+//                faceCardArray.add(card);                
+//                computer3hand.remove(card);
+//                break;
+//            }else{
+//                computer3hand.add(communityCardsArray.pollFirst());
+//            }
         
-        checkForWinner(playerHand, "Human Player Wins" ,"CONGRATULATIONS YOU ARE THE WINNER !");
-                        
-    }
 }
