@@ -269,7 +269,12 @@ public class Table extends JFrame{
      */
     public void rearrangeCards(){        
         int playerX = 700;
-        int aaa = 600/playerHand.size(); 
+        int aaa = 5;
+        try{
+            aaa = 600/playerHand.size(); 
+        }catch(ArithmeticException e){
+            System.out.println("exception player has no more cards to rearrange");
+        }
         
         for(PlayerCard card: playerHand){          
             card.setLocation(playerX, 400);  
@@ -306,10 +311,13 @@ public class Table extends JFrame{
     PlayerCard cardToMoveArround;
     
     //The computerAI method uses Iterator to prevent ConcurrentModificationException
-    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayDeque<PlayerCard> faceCardArray,
-            ArrayDeque<PlayerCard> communityCardsArray){
-        
+    //and instead of an else statement I used a check to decide if the computer player
+    //needs to draw a card from Community, to prevent the same exception
+    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayList<PlayerCard> computer2hand, ArrayList<PlayerCard> computer3hand,
+            ArrayDeque<PlayerCard> faceCardArray, ArrayDeque<PlayerCard> communityCardsArray){
+           
         //Computer1 
+        int computer1handSizeBefore = computer1hand.size();
         Iterator<PlayerCard> iterator1 = computer1hand.iterator();
         
         while(iterator1.hasNext()){
@@ -321,100 +329,63 @@ public class Table extends JFrame{
                 computer1hand.remove(card1);                
                 break;
             }
-//            if(!card1.getRank().equals(faceCardArray.getLast().getRank()) && 
-//                    !card1.getSuit().equals(faceCardArray.getLast().getSuit())){
-//                computer1hand.add(communityCardsArray.pollFirst());
-//            } 
         }
+        
+        checkForWinner(computer1hand, "c1", "c1");
+        
+        int computer1handSizeAfter = computer1hand.size();
+        
+        if(computer1handSizeBefore == computer1handSizeAfter){
+            computer1hand.add(communityCardsArray.pollFirst());
+        }
+        System.out.println(computer1hand.size());
+        
         //Computer2
-//        Iterator<PlayerCard> iterator2 = computer2hand.iterator();
-//        
-//        while(iterator2.hasNext()){
-//            PlayerCard card = iterator2.next();
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                faceCard.setIcon(card.getCardIcon());
-//                faceCardArray.add(card);                
-//                computer2hand.remove(card);                
-//                break;
-//            }else{
-//                computer1hand.add(communityCardsArray.pollFirst());
-//            }
-//        }
-//        //Computer3
-//        Iterator<PlayerCard> iterator3 = computer3hand.iterator();
-//        
-//        while(iterator3.hasNext()){
-//            PlayerCard card = iterator3.next();
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                faceCard.setIcon(card.getCardIcon());
-//                faceCardArray.add(card);                
-//                computer3hand.remove(card);                
-//                break;
-//            }else{
-//                computer1hand.add(communityCardsArray.pollFirst());
-//            }
-//        }
+        int computer2handSizeBefore = computer2hand.size();
+        Iterator<PlayerCard> iterator2 = computer2hand.iterator();
         
+        while(iterator2.hasNext()){
+            PlayerCard card2 = iterator2.next();
+            if(card2.getRank().equals(faceCardArray.getLast().getRank()) || 
+                    card2.getSuit().equals(faceCardArray.getLast().getSuit())){                
+                faceCard.setIcon(card2.getCardIcon());
+                faceCardArray.add(card2);                
+                computer2hand.remove(card2);                
+                break;
+            }
+        }
+        
+        checkForWinner(computer2hand, "c2", "c2");
+        
+        int computer2handSizeAfter = computer2hand.size();
+        
+        if(computer2handSizeBefore == computer2handSizeAfter){
+            computer2hand.add(communityCardsArray.pollFirst());
+        }
+        System.out.println(computer2hand.size());
+        
+        //Computer3
+        int computer3handSizeBefore = computer3hand.size();
+        Iterator<PlayerCard> iterator3 = computer3hand.iterator();
+        
+        while(iterator3.hasNext()){
+            PlayerCard card3 = iterator3.next();
+            if(card3.getRank().equals(faceCardArray.getLast().getRank()) || 
+                    card3.getSuit().equals(faceCardArray.getLast().getSuit())){                
+                faceCard.setIcon(card3.getCardIcon());
+                faceCardArray.add(card3);                
+                computer3hand.remove(card3);                
+                break;
+            }
+        }
+        
+        checkForWinner(computer3hand, "c3", "c3");
+        
+        int computer3handSizeAfter = computer3hand.size();
+        
+        if(computer3handSizeBefore == computer3handSizeAfter){
+            computer3hand.add(communityCardsArray.pollFirst());
+        }
+        System.out.println(computer3hand.size());
     }
-    
-//    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayDeque<PlayerCard> faceCardArray,
-//            ArrayDeque<PlayerCard> communityCardsArray){
-//                        
-//        for(PlayerCard card : computer1hand){
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                //faceCard.setIcon(card.getCardIcon());
-//                
-//                cardToMoveArround = card;
-//                
-//                break;
-//            }else{
-//                computer1hand.add(communityCardsArray.pollFirst());
-//            }
-//        }
-//        faceCard.setIcon(cardToMoveArround.getCardIcon());
-//        faceCardArray.add(cardToMoveArround);                
-//        computer1hand.remove(cardToMoveArround);
-//    }
-
-
-    
-//    public void computerAI(ArrayList<PlayerCard> computer1hand, ArrayList<PlayerCard> computer2hand,
-//            ArrayList<PlayerCard> computer3hand, ArrayDeque<PlayerCard> faceCardArray, ArrayDeque<PlayerCard> communityCardsArray){
-//        
-//        for(PlayerCard card : computer1hand)
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                faceCard.setIcon(card.getCardIcon());
-//                faceCardArray.add(card);                
-//                computer1hand.remove(card);                
-//                break;
-//            }else{
-//                computer1hand.add(communityCardsArray.pollFirst());
-//            }
-        
-//        for(PlayerCard card : computer2hand)
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                faceCard.setIcon(card.getCardIcon());
-//                faceCardArray.add(card);                
-//                computer2hand.remove(card);
-//                break;
-//            }else{
-//                computer2hand.add(communityCardsArray.pollFirst());
-//            }
-//        
-//        for(PlayerCard card : computer3hand)
-//            if(card.getRank().equals(faceCardArray.getLast().getRank()) || 
-//                    card.getSuit().equals(faceCardArray.getLast().getSuit())){                
-//                faceCard.setIcon(card.getCardIcon());
-//                faceCardArray.add(card);                
-//                computer3hand.remove(card);
-//                break;
-//            }else{
-//                computer3hand.add(communityCardsArray.pollFirst());
-//            }
-        
 }
