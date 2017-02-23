@@ -3,6 +3,7 @@ package app.app;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.border.LineBorder;
@@ -41,10 +42,27 @@ public class CommunityCard extends Card {
                 System.out.println("COMM CARD pressed");
                                 
                 cc.setBorder(new LineBorder(Color.ORANGE, 3));
+                
+                ComputerAI.move(table);
 
                 table.rearrangeCards();
                 
-                Dealer.refillCommunityCards(communityCardsArray, faceCard);
+                LocalDateTime timePoint = LocalDateTime.now();
+                table.assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
+                    "| Round " + table.dealer.roundNumber  + ": click " + table.faceCardArray.getLast().getRank() + 
+                    " or " + table.faceCardArray.getLast().getSuit());
+                    
+                Dealer.roundNumber++;
+                
+                                
+                //Dealer.refillCommunityCards(communityCardsArray, faceCard);
+                
+                
+//                try{
+//                    Thread.sleep(1000);
+//                }catch(InterruptedException ex){
+//                    ex.printStackTrace();
+//                }
             }
 
             //Record the position where the mouse was clicked for repositioning

@@ -5,12 +5,17 @@
  */
 package app.app;
 
+import java.time.LocalDateTime;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class Assistant extends JFrame implements Runnable{
-
+    
+    JTextArea textArea;
+    
+    
+    
     public Assistant(Table table){
         this.setSize(200, 200);
         this.setLocation(100, 100);
@@ -20,18 +25,21 @@ public class Assistant extends JFrame implements Runnable{
         this.setVisible(true);        
         
         JScrollPane jsp = new JScrollPane();
-        JTextArea ta = new JTextArea();
-
-        ta.setText("Hello and Welcome to Choices !");
-        ta.append("\nClick on " + table.faceCardArray.getLast().getRank() + 
+        textArea = new JTextArea();
+        
+        
+        LocalDateTime timePoint = LocalDateTime.now();
+        textArea.setText("Hello and Welcome to Choices !");
+        textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
+                "| Round 1: click " + table.faceCardArray.getLast().getRank() + 
                 " or " + table.faceCardArray.getLast().getSuit());
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ta.setColumns(20);
-        ta.setRows(5);
-        jsp.setViewportView(ta);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jsp.setViewportView(textArea);
 
         getContentPane().add(jsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 400, 300));
 
@@ -51,5 +59,4 @@ public class Assistant extends JFrame implements Runnable{
         return "\nComputer1:" + firstPlayer + " Computer2:" + secondPlayer + " Computer3:" + thirdlayer;
         
     }
-    
 }

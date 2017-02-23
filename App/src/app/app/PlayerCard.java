@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -26,7 +27,6 @@ public class PlayerCard extends Card {
     private ImageIcon
             icon;
 
-    private static int roundNumber = 2;        
     
     /**
      * Constructor that gives a handle to faceCard and humanPlayerHand arrays
@@ -81,30 +81,26 @@ public class PlayerCard extends Card {
                 if(pc.getSuit().equals(faceCard.getLast().getSuit()) ||
                        pc.getRank().equals(faceCard.getLast().getRank())){
                     
-                    //check for winner
-                    table.checkForWinner(humanPlayerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
-                    
                     //add to faceCard array
-                    table.faceCard.setIcon(pc.getCardIcon());
-                    table.textArea.append("\nclick on " + pc.getRank() + " or " + pc.getSuit());
+                    table.faceCard.setIcon(pc.getCardIcon());                    
                     pc.setLocation(Card.FACECARDLOCATION);
                     faceCard.add(pc);                    
                     System.out.println("card moved");
                     
                     humanPlayerHand.remove(pc);
                     
+                    //check for winner
+                    table.dealer.checkForWinner(humanPlayerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
+                                           
+                    ComputerAI.move(table);
                     
+                    LocalDateTime timePoint = LocalDateTime.now();
+                    table.assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
+                        "| Round " + table.dealer.roundNumber  + ": click " + table.faceCardArray.getLast().getRank() + 
+                        " or " + table.faceCardArray.getLast().getSuit());
                     
-                    table.textArea.append(table.assistant.updateCardNumbers(table));
-                    table.assistant.ta.append("\nRound " + roundNumber + " click on " +
-                            faceCard.getLast().getRank() + " or " + faceCard.getLast().getSuit());
-                   
-                    roundNumber++;
-                    
-                    table.computerAI(table.computer1hand, table.faceCardArray, table.communityCardsArray);
-                    table.checkForWinner(table.computer1hand, "Computer 1 Wins","YOU LOST !");
-                    table.checkForWinner(table.computer2hand, "Computer 1 Wins","YOU LOST !");
-                    table.checkForWinner(table.computer3hand, "Computer 1 Wins","YOU LOST !"); 
+                    table.dealer.roundNumber++;
+//                  
                 }                            
             }
             
