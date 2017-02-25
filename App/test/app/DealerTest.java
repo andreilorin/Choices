@@ -5,8 +5,9 @@
  */
 package app;
 
-import app.app.Dealer;
-import app.app.PlayerCard;
+import table.Dealer;
+import cards.PlayerCard;
+import table.Table;
 import org.mockito.Mockito;
 
 import java.util.ArrayDeque;
@@ -31,14 +32,14 @@ public class DealerTest {
     private static ArrayList<PlayerCard> allTheCards;
     private static ArrayDeque<PlayerCard> faceCard;
     private static ArrayList<ArrayList<PlayerCard>> players;
-    private static ArrayDeque<PlayerCard> deck;
-    private static ArrayList<PlayerCard> humanPlayerHand;
+    private static ArrayDeque<PlayerCard> deck;    
     
     private static ArrayList<ImageIcon> allImages;
     
-    private String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};;
+    private static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};;
     private static final String[] SUIT = {"club", "diamond", "heart", "spade"};
     
+    private static Table table;
     
     public DealerTest() {
     }
@@ -68,7 +69,8 @@ public class DealerTest {
     
     @Before
     public void setUp() {
-        dealer = new Dealer();             
+        dealer = new Dealer();
+        table = new Table();
     }
     
     @After
@@ -84,8 +86,7 @@ public class DealerTest {
     public void testCreateAllTheCards_3args() {
         System.out.println("createAllTheCards()");
         
-        allTheCards = dealer.createAllTheTouchCards(RANK, SUIT, allImages, faceCard,
-                humanPlayerHand);
+        allTheCards = dealer.createAllPlayerCards(RANK, SUIT, allImages, table);
         assertEquals(52, allTheCards.size());        
     }
 
