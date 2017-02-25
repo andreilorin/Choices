@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.app;
+package table;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 
 public class Assistant extends JFrame implements Runnable{
     
-    JTextArea textArea;
+    public JTextArea textArea;
         
     public Assistant(Table table){
         this.setSize(200, 200);

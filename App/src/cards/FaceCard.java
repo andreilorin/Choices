@@ -1,33 +1,37 @@
-package app.app;
+package cards;
 
-import java.awt.Color;
+import cards.Card;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.border.LineBorder;
+import java.util.ArrayDeque;
 
 /**
- * Representation of the computer card, extends Card
+ * Representation of the face card, extends Card
  * @author Lorin
  */
-public class ComputerCard extends Card {
+public class FaceCard extends Card{
     
     /**
-     * No arguments constructor with default settings
-     * Adds MouseMotionListener
+     * Constructor with handle to faceCardArray
+     * Adds MouseListener
+     * @param faceCardArray 
      */
-    public ComputerCard(){       
-        //set border color to differentiate from other type of cards
-        setBorder(new LineBorder(Color.WHITE, 3));
+    public FaceCard(ArrayDeque<PlayerCard> faceCardArray){
         
-        //add mouse listener
+        //set image
+        this.setIcon(faceCardArray.getFirst().getCardIcon());
+        
+        //settings
+        setLocation(350, 200);
+        
         addMouseListener(new MouseListener() {
-            
+
             @Override
-            public void mouseClicked(MouseEvent e) {
-                //get the source of the event 
-                ComputerCard cc = (ComputerCard)e.getSource();
+            public void mouseClicked(MouseEvent e) { 
+                //get the source of the event                
+                FaceCard pc = (FaceCard)e.getSource(); 
+                System.out.println("FACE CARD clicked");
                 
-                System.out.println("COMPUTER CARD clicked");                
             }
 
             //Record the position where the mouse was clicked for repositioning
@@ -48,7 +52,6 @@ public class ComputerCard extends Card {
 
             @Override
             public void mouseExited(MouseEvent e) { }
-
         });
-    }
+    }   
 }

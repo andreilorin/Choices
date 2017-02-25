@@ -1,4 +1,4 @@
-package app.app;
+package cards;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -27,8 +27,8 @@ public abstract class Card extends JButton{
     public volatile int myX = 0;
     public volatile int myY = 0;
     
-    protected static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    protected static final String[] SUIT = {"club", "diamond", "heart", "spade"};
+    public static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    public static final String[] SUIT = {"club", "diamond", "heart", "spade"};
     
     public final ImageIcon backOfTheCard = new ImageIcon("src\\app\\images\\deckcard.png");
 

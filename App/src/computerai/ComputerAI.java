@@ -1,6 +1,9 @@
-package app.app;
+package computerai;
 
+import cards.PlayerCard;
 import java.util.Iterator;
+import table.Dealer;
+import table.Table;
 
 /**
  *

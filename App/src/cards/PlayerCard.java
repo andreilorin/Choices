@@ -1,5 +1,8 @@
-package app.app;
+package cards;
 
+import computerai.ComputerAI;
+import table.Table;
+import cards.Card;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -88,8 +91,7 @@ public class PlayerCard extends Card {
                         "| Round " + table.dealer.roundNumber  + ": click " + table.faceCardArray.getLast().getRank() + 
                         " or " + table.faceCardArray.getLast().getSuit());
                     
-                    table.dealer.roundNumber++;
-//                  
+                    table.dealer.roundNumber++;                  
                 }                            
             }
             

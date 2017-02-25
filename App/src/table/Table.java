@@ -1,5 +1,10 @@
-package app.app;
+package table;
 
+import cards.PlayerCard;
+import cards.FaceCard;
+import cards.ComputerCard;
+import cards.CommunityCard;
+import cards.Card;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
@@ -19,38 +24,38 @@ public class Table extends JFrame{
     public Dealer dealer;
     
     //Computer player hands
-    ComputerCard computer1;
-    ComputerCard computer2;
-    ComputerCard computer3;
+    public ComputerCard computer1;
+    public ComputerCard computer2;
+    public ComputerCard computer3;
     
     //assistant
-    Assistant assistant;
+    public Assistant assistant;
     
     //field to display image of the face card
-    FaceCard faceCard;
+    public FaceCard faceCard;
    
     //Array to load all the images
-    ArrayList<ImageIcon> allImages = new ArrayList<>(); 
+    public ArrayList<ImageIcon> allImages = new ArrayList<>(); 
     
     //Array to store all the cards
-    ArrayList<PlayerCard> allTheCards;
+    public ArrayList<PlayerCard> allTheCards;
     
     //ArrayList for computer players 
-    ArrayList<PlayerCard> computer1hand = new ArrayList<>();
-    ArrayList<PlayerCard> computer2hand = new ArrayList<>();
-    ArrayList<PlayerCard> computer3hand = new ArrayList<>();
+    public ArrayList<PlayerCard> computer1hand = new ArrayList<>();
+    public ArrayList<PlayerCard> computer2hand = new ArrayList<>();
+    public ArrayList<PlayerCard> computer3hand = new ArrayList<>();
     
     //ArrayList for human player
-    ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
+    public ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
     
     //ArrayList of players AL
-    ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
+    public ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
             
     //ArrayList for faceCard
-    ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
+    public ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
         
     //ArrayDeque for ComunityCards
-    ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
+    public ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
     
     //main method    
     public static void main(String[] args) {        
@@ -83,7 +88,7 @@ public class Table extends JFrame{
                         
         //create and add all the cards to the array
         allTheCards = dealer.createAllPlayerCards(Card.RANK, Card.SUIT, 
-                allImages, faceCardArray, playerHand, this);// 
+                allImages, this);// 
         
         //add players array to one array
         allPlayers.add(computer1hand);

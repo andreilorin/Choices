@@ -1,5 +1,9 @@
-package app.app;
+package cards;
 
+import computerai.ComputerAI;
+import table.Dealer;
+import table.Table;
+import cards.Card;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -45,7 +49,7 @@ public class CommunityCard extends Card {
                 
                 ComputerAI.move(table);
 
-                //table.rearrangeCards();
+                table.rearrangeCards();
                 
                 LocalDateTime timePoint = LocalDateTime.now();
                 table.assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +

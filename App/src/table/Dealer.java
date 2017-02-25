@@ -1,5 +1,6 @@
-package app.app;
+package table;
 
+import cards.PlayerCard;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,8 +26,8 @@ public class Dealer {
      * @param table
      * @return 
      */
-    public ArrayList<PlayerCard> createAllPlayerCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
-            ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand, Table table){
+    public ArrayList<PlayerCard> createAllPlayerCards(String[] rank, String[] suit,
+            ArrayList<ImageIcon> allImages, Table table){
         
         ArrayList<PlayerCard> allTheCards = new ArrayList<>();       
         int cardNumber = 0;
