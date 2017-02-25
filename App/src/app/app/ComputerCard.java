@@ -17,7 +17,7 @@ public class ComputerCard extends Card {
      */
     public ComputerCard(){       
         //set border color to differentiate from other type of cards
-        setBorder(new LineBorder(Color.RED, 3));
+        setBorder(new LineBorder(Color.WHITE, 3));
         
         //add mouse listener
         addMouseListener(new MouseListener() {

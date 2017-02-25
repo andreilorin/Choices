@@ -2,13 +2,18 @@ package app.app;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Represents the dealer
  * @author Lorin
  */
-public class Dealer {    
+public class Dealer {
+    
+    public static int roundNumber = 2;
    
     /**
      * Creates all the cards in the game with icons
@@ -20,14 +25,14 @@ public class Dealer {
      * @param table
      * @return 
      */
-    public ArrayList<PlayerCard> createAllTheTouchCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
+    public ArrayList<PlayerCard> createAllPlayerCards(String[] rank, String[] suit, ArrayList<ImageIcon> allImages,
             ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> humanPlayerHand, Table table){
         
         ArrayList<PlayerCard> allTheCards = new ArrayList<>();       
         int cardNumber = 0;
         for(int j=0; j<suit.length; j++){
             for(int i=0; i<rank.length; i++){            
-                PlayerCard card = new PlayerCard(rank[i], suit[j], allImages.get(cardNumber), faceCard, humanPlayerHand, table);
+                PlayerCard card = new PlayerCard(rank[i], suit[j], allImages.get(cardNumber), table);
                 allTheCards.add(card);
                 cardNumber++;
             }            
@@ -69,39 +74,41 @@ public class Dealer {
                 
         ArrayList<PlayerCard> swapList = new ArrayList<>();
              
-        if(communityCardsArray.isEmpty()){
+        if(communityCardsArray.size() == 1){
             
-            System.out.println("refilling community cards");
-            for(int i=0; i<faceCardArray.size(); i++){
-                swapList.add(faceCardArray.getFirst());
+            System.out.println("fill swap");
+            Iterator<PlayerCard> iterator1 = faceCardArray.iterator();
+            while(iterator1.hasNext()){
+                PlayerCard card1 = iterator1.next();
+                swapList.add(card1);
             }
+            System.out.println("swap list size : " + swapList.size());
             
-            for(int i=0; i<swapList.size(); i++){
-                //int random = (int)(Math.random() * swapList.size()); 
-                //communityCardsArray.add(swapList.get(random));
-                
-                communityCardsArray.add(swapList.get(i));
+            Iterator<PlayerCard> iterator2 = faceCardArray.iterator();
+            while(iterator2.hasNext()){
+                PlayerCard card2 = iterator2.next();
+                communityCardsArray.add(card2);
             }
+            System.out.println("comm card new size " + communityCardsArray.size());
         }
     }
     
-    public static void findWinner(ArrayList<PlayerCard> computer1hand, ArrayList<PlayerCard> computer2hand,
-            ArrayList<PlayerCard> computer3hand, ArrayList<PlayerCard> playerHand){
+    public void checkForWinner(Collection hand, String message, String winner ){
+        if(hand.isEmpty()){
+            JOptionPane.showMessageDialog(null, winner, message, JOptionPane.INFORMATION_MESSAGE);
+        }        
+    }
+    
+    public static int getRoundNumber(){
+        return roundNumber;
+    }
+    
+    public String updateCardNumbers(Table table){
+        int firstPlayer = table.computer1hand.size();
+        int secondPlayer = table.computer2hand.size();
+        int thirdlayer = table.computer3hand.size();
         
-        if(computer1hand.isEmpty()){
-            System.out.println("Player1 wins");
-        }
-        else if(computer2hand.isEmpty()){
-            System.out.println("Player2 wins");
-        }
-        else if(computer3hand.isEmpty()){
-            System.out.println("Player3 wins");
-        }
-        else if(playerHand.isEmpty())
-            System.out.println("You Win !");
-    }
-    
-    public static void updateFaceCardImage(FaceCard fc, ArrayDeque<PlayerCard> faceCard){
-        fc.setIcon(faceCard.getLast().getCardIcon());
+        return "\nComputer1:" + firstPlayer + " Computer2:" + secondPlayer + " Computer3:" + thirdlayer;
+        
     }
 }

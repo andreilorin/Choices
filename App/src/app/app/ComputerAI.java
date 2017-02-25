@@ -33,8 +33,9 @@ public class ComputerAI {
         int computer1handSizeAfter = table.computer1hand.size();
         
         if(computer1handSizeBefore == computer1handSizeAfter){
-            table.computer1hand.add(table.communityCardsArray.pollFirst());
+            table.computer1hand.add(table.communityCardsArray.pollFirst());            
         }
+        Dealer.refillCommunityCards(table.communityCardsArray, table.faceCardArray);
         System.out.println(table.computer1hand.size() + " C1");
         
         //Computer2
@@ -57,8 +58,9 @@ public class ComputerAI {
         int computer2handSizeAfter = table.computer2hand.size();
         
         if(computer2handSizeBefore == computer2handSizeAfter){
-            table.computer2hand.add(table.communityCardsArray.pollFirst());
+            table.computer2hand.add(table.communityCardsArray.pollFirst());            
         }
+        Dealer.refillCommunityCards(table.communityCardsArray, table.faceCardArray);
         System.out.println(table.computer2hand.size() + " C2");
         
         //Computer3
@@ -81,8 +83,9 @@ public class ComputerAI {
         int computer3handSizeAfter = table.computer3hand.size();
         
         if(computer3handSizeBefore == computer3handSizeAfter){
-            table.computer3hand.add(table.communityCardsArray.pollFirst());
+            table.computer3hand.add(table.communityCardsArray.pollFirst());            
         }
+        Dealer.refillCommunityCards(table.communityCardsArray, table.faceCardArray);
         System.out.println(table.computer3hand.size() + " C3");
     }
     

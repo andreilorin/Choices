@@ -6,6 +6,7 @@
 package app.app;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -13,13 +14,11 @@ import javax.swing.JTextArea;
 public class Assistant extends JFrame implements Runnable{
     
     JTextArea textArea;
-    
-    
-    
+        
     public Assistant(Table table){
         this.setSize(200, 200);
         this.setLocation(100, 100);
-        this.setTitle("Assistant");
+        this.setTitle("Choices - Assistant");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
         this.setVisible(true);        
@@ -27,11 +26,12 @@ public class Assistant extends JFrame implements Runnable{
         JScrollPane jsp = new JScrollPane();
         textArea = new JTextArea();
         
-        
         LocalDateTime timePoint = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedDate = timePoint.format(format);
+        
         textArea.setText("Hello and Welcome to Choices !");
-        textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
-                "| Round 1: click " + table.faceCardArray.getLast().getRank() + 
+        textArea.append("\n"+ formattedDate + "| Round 1: click " + table.faceCardArray.getLast().getRank() + 
                 " or " + table.faceCardArray.getLast().getSuit());
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -41,22 +41,11 @@ public class Assistant extends JFrame implements Runnable{
         textArea.setRows(5);
         jsp.setViewportView(textArea);
 
-        getContentPane().add(jsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 400, 300));
+        getContentPane().add(jsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
-        
-
     }
     
     @Override
     public void run() {}
-    
-    public String updateCardNumbers(Table table){
-        int firstPlayer = table.computer1hand.size();
-        int secondPlayer = table.computer2hand.size();
-        int thirdlayer = table.computer3hand.size();
-        
-        return "\nComputer1:" + firstPlayer + " Computer2:" + secondPlayer + " Computer3:" + thirdlayer;
-        
-    }
 }

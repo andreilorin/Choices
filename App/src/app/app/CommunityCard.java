@@ -45,7 +45,7 @@ public class CommunityCard extends Card {
                 
                 ComputerAI.move(table);
 
-                table.rearrangeCards();
+                //table.rearrangeCards();
                 
                 LocalDateTime timePoint = LocalDateTime.now();
                 table.assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
@@ -53,11 +53,9 @@ public class CommunityCard extends Card {
                     " or " + table.faceCardArray.getLast().getSuit());
                     
                 Dealer.roundNumber++;
-                
                                 
-                //Dealer.refillCommunityCards(communityCardsArray, faceCard);
-                
-                
+                Dealer.refillCommunityCards(communityCardsArray, faceCard);
+                                
 //                try{
 //                    Thread.sleep(1000);
 //                }catch(InterruptedException ex){

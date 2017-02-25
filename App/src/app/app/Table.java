@@ -80,9 +80,7 @@ public class Table extends JFrame{
         
         //instantiate dealer
         dealer = new Dealer();
-        
-        //FaceCard faceCard = new FaceCard(faceCardArray);
-        
+                        
         //create and add all the cards to the array
         allTheCards = dealer.createAllPlayerCards(Card.RANK, Card.SUIT, 
                 allImages, faceCardArray, playerHand, this);// 
@@ -106,7 +104,6 @@ public class Table extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 rearrangeCards();                
             }
-
             @Override
             public void mousePressed(MouseEvent e) {}
 
@@ -118,10 +115,8 @@ public class Table extends JFrame{
 
             @Override
             public void mouseExited(MouseEvent e) {}
-        });
-        
-        rearangeCardsButton.setVisible(true);
-        
+        });        
+        rearangeCardsButton.setVisible(true);        
         this.add(rearangeCardsButton);
         
         //create second button
@@ -137,9 +132,7 @@ public class Table extends JFrame{
                 LocalDateTime timePoint = LocalDateTime.now();
                 assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
                         "| Round " + (Dealer.getRoundNumber() - 1) + ": click on " +  
-                        faceCardArray.getLast().getRank() + " or " + faceCardArray.getLast().getSuit());
-                
-                //Dealer.roundNumber++;
+                        faceCardArray.getLast().getRank() + " or " + faceCardArray.getLast().getSuit());                                
             }
 
             @Override
@@ -154,11 +147,9 @@ public class Table extends JFrame{
         rearangeCards2.setVisible(true);        
         this.add(rearangeCards2);
         
-        //add all the cards on the table
-        //logger.info("placing dummy cards");
+        //add all the cards on the table        
         placeDummyCards();
         
-        //logger.info("placing cards");
         placeCardsOnTable();
         
         //frame settings
@@ -286,7 +277,7 @@ public class Table extends JFrame{
         }catch(ArithmeticException e){
             System.out.println("exception player has no more cards to rearrange");
         }catch(NullPointerException ex){
-            System.out.println("null pointer, no card in playr hand to place");
+            System.out.println("null pointer, no card in player hand to place");
         }
     }
 }

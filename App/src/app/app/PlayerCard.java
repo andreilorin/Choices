@@ -17,30 +17,20 @@ import javax.swing.border.LineBorder;
 
 public class PlayerCard extends Card {
     //Fields
-    private String
-            rank,
-            suite;
-    
-    private final int
-            value;
-    
-    private ImageIcon
-            icon;
+    private String rank, suite;    
+    private final int value;    
+    private final ImageIcon icon;
 
-    
     /**
      * Constructor that gives a handle to faceCard and humanPlayerHand arrays
      * Adds MouseListener
+     * I could pass onlyTable to the constructor
      * @param rank
      * @param suite
-     * @param icon
-     * @param faceCard
-     * @param humanPlayerHand
+     * @param icon     
      * @param table
      */
-    public PlayerCard(String rank, String suite, ImageIcon icon, 
-            ArrayDeque<PlayerCard> faceCard,
-            ArrayList<PlayerCard> humanPlayerHand, Table table) {
+    public PlayerCard(String rank, String suite, ImageIcon icon, Table table) {
         
         this.rank = rank;
         this.suite = suite;
@@ -76,21 +66,20 @@ public class PlayerCard extends Card {
                 System.out.println("clicked on player card " + pc.getCardValues());                        
                       
                 pc.setBorder(new LineBorder(Color.BLACK, 3));
-                
-                //TODO*****************************************************
-                if(pc.getSuit().equals(faceCard.getLast().getSuit()) ||
-                       pc.getRank().equals(faceCard.getLast().getRank())){
+                                
+                if(pc.getSuit().equals(table.faceCardArray.getLast().getSuit()) ||
+                       pc.getRank().equals(table.faceCardArray.getLast().getRank())){
                     
                     //add to faceCard array
                     table.faceCard.setIcon(pc.getCardIcon());                    
                     pc.setLocation(Card.FACECARDLOCATION);
-                    faceCard.add(pc);                    
+                    table.faceCardArray.add(pc);                    
                     System.out.println("card moved");
                     
-                    humanPlayerHand.remove(pc);
+                    table.playerHand.remove(pc);
                     
                     //check for winner
-                    table.dealer.checkForWinner(humanPlayerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
+                    table.dealer.checkForWinner(table.playerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
                                            
                     ComputerAI.move(table);
                     

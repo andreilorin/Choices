@@ -30,7 +30,7 @@ public abstract class Card extends JButton{
     protected static final String[] RANK = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     protected static final String[] SUIT = {"club", "diamond", "heart", "spade"};
     
-    public final ImageIcon backOfTheCard = new ImageIcon("C:\\Users\\Lorin\\Documents\\NetBeansProjects\\Choices\\App\\src\\app\\images\\deckcard.png");
+    public final ImageIcon backOfTheCard = new ImageIcon("src\\app\\images\\deckcard.png");
 
     /**
      * No arguments constructor with default settings
@@ -72,7 +72,5 @@ public abstract class Card extends JButton{
 
     public int getMyY() {
         return myY;
-    }
-    
-    
+    }        
 }
