@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +23,7 @@ import javax.swing.JFrame;
 public class Table extends JFrame{
     
     //Dealer
-    public Dealer dealer;
+    public Dealer dealer = new Dealer();
     
     //Computer player hands
     public ComputerCard computer1;
@@ -64,109 +66,19 @@ public class Table extends JFrame{
     
     /**
      * Constructor
-     * Sets up the table and the cards
+     * Sets up the game components
      */
     public Table(){   
-               
-        this.setLayout(null);        
-        
-        //add images to to allImages ArrayList
-        for(int i=0; i<52; i++){
-            
-            String name = "src\\app\\images\\" + i + ".png";
-                       
-            try{
-                ImageIcon bigImage = new ImageIcon(name);                
-                allImages.add(bigImage);
-            }catch(Exception e){
-                System.out.println(e);
-            }
-        }
-        
-        //instantiate dealer
-        dealer = new Dealer();
-                        
-        //create and add all the cards to the array
-        allTheCards = dealer.createAllPlayerCards(Card.RANK, Card.SUIT, 
-                allImages, this);// 
-        
-        //add players array to one array
-        allPlayers.add(computer1hand);
-        allPlayers.add(computer2hand);
-        allPlayers.add(computer3hand);
-        
-        allPlayers.add(playerHand);
-        
-        //deal the cards
-        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
-                    
-        //create button for rearenge
-        JButton rearangeCardsButton = new JButton("Rearange");
-        rearangeCardsButton.setLocation(0, 0);
-        rearangeCardsButton.setSize(150, 50);
-        rearangeCardsButton.addMouseListener(new MouseListener(){
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                rearrangeCards();                
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-        });        
-        rearangeCardsButton.setVisible(true);        
-        this.add(rearangeCardsButton);
-        
-        //create second button
-        JButton rearangeCards2 = new JButton("Assistant");
-        rearangeCards2.setLocation(200, 0);
-        rearangeCards2.setSize(150, 50);        
-        rearangeCards2.addMouseListener(new MouseListener(){
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                assistant = new Assistant(Table.this);
-                assistant.run();
-                assistant.textArea.setText(null);
-                LocalDateTime timePoint = LocalDateTime.now();
-                assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
-                        "| Round " + (Dealer.getRoundNumber() - 1) + ": click on " +  
-                        faceCardArray.getLast().getRank() + " or " + faceCardArray.getLast().getSuit());                                
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}            
-        });        
-        rearangeCards2.setVisible(true);        
-        this.add(rearangeCards2);
-        
-        //add all the cards on the table        
+        addCardImages("src\\resources\\");
+        addCardsToArray();
+        addPlayersArraysInAllPlayersArray(allPlayers, computer1hand, computer2hand, computer3hand, playerHand);
+        dealCards();
+        placeRearangeButton();
+        placeAssistantButton();
         placeDummyCards();
-        
         placeCardsOnTable();
-        
-        //frame settings
-        this.setSize(1000, 800);
-        this.setLocation(500, 200);
-        this.setTitle("Choices");
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
-        this.setVisible(true); 
-        
-        assistant = new Assistant(this);
-        assistant.run();
+        setTableFrameAttributes();
+        addAssistant();
     }
     
     /**
@@ -285,4 +197,115 @@ public class Table extends JFrame{
             System.out.println("null pointer, no card in player hand to place");
         }
     }
+    
+    public void addCardImages(String path){
+         for(int i=0; i<52; i++){
+            
+            String name = path + i + ".png";           
+                       
+            try{
+                ImageIcon bigImage = new ImageIcon(name);                
+                allImages.add(bigImage);
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+    
+    // the method is leaking "this" in the constructor
+    public void setTableFrameAttributes(Table table){
+        table.setLayout(null);
+        table.setSize(1000, 800);
+        table.setLocation(500, 200);
+        table.setTitle("Choices");
+        table.setResizable(false);
+        table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
+        table.setVisible(true);    
+    }
+    
+    public void setTableFrameAttributes(){
+        this.setLayout(null);
+        this.setSize(1000, 800);
+        this.setLocation(500, 200);
+        this.setTitle("Choices");
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
+        this.setVisible(true);         
+    }
+    
+    public void placeRearangeButton(){
+        JButton rearangeCardsButton = new JButton("Rearange");
+        rearangeCardsButton.setLocation(0, 0);
+        rearangeCardsButton.setSize(150, 50);
+        rearangeCardsButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                rearrangeCards();                
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });        
+        rearangeCardsButton.setVisible(true);        
+        this.add(rearangeCardsButton);
+    }
+        
+    public void placeAssistantButton(){
+        JButton startAssistantButton = new JButton("Assistant");
+        startAssistantButton.setLocation(200, 0);
+        startAssistantButton.setSize(150, 50);        
+        startAssistantButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                assistant = new Assistant(Table.this);
+                assistant.run();
+                assistant.textArea.setText(null);
+                LocalDateTime timePoint = LocalDateTime.now();
+                assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
+                        "| Round " + (Dealer.getRoundNumber() - 1) + ": click on " +  
+                        faceCardArray.getLast().getRank() + " or " + faceCardArray.getLast().getSuit());                                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}            
+        });        
+        startAssistantButton.setVisible(true);        
+        this.add(startAssistantButton);
+    }
+    
+    public void addPlayersArraysInAllPlayersArray(ArrayList<ArrayList<PlayerCard>> allPlayers, ArrayList<PlayerCard>... arrays){
+        for (ArrayList<PlayerCard> array : arrays) {
+            allPlayers.add(array);
+        }
+    }
+    
+    public void addAssistant(){
+        assistant = new Assistant(this);
+        assistant.run();
+    }
+    
+    public void addCardsToArray(){
+        //create and add all the cards to the array
+        allTheCards = dealer.createAllPlayerCards(Card.RANK, Card.SUIT, 
+                allImages, this);// 
+    }
+    
+    public void dealCards(){
+        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
+    }
+    
 }
