@@ -3,7 +3,6 @@ package cards;
 import computerai.ComputerAI;
 import table.Dealer;
 import table.Table;
-import cards.Card;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,26 +13,14 @@ import javax.swing.border.LineBorder;
 
 /**
  * Representation of the CommunityCard, extends Card
- * @author Lorin
  */
 public class CommunityCard extends Card {
     
-    /**
-     * Constructor that gets a handle to the faceCard array and human card array
-     * Adds MouseListener
-     * @param table
-     * @param faceCard
-     * @param playerHand
-     * @param communityCardsArray 
-     */
     public CommunityCard(Table table, ArrayDeque<PlayerCard> faceCard, ArrayList<PlayerCard> playerHand, ArrayDeque<PlayerCard> communityCardsArray) {
                 
-        //settings
         setLocation(Card.COMMUNITYDCARDLOCATION);
         
-        //add mouse listener
         addMouseListener(new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 //get the source of the event

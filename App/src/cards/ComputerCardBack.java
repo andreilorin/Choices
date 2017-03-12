@@ -1,32 +1,24 @@
 package cards;
 
-import cards.Card;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.border.LineBorder;
 
 /**
- * Representation of the computer card, extends Card
- * @author Lorin
+ * Class used for cards with their back facing the player 
  */
-public class ComputerCard extends Card {
+public class ComputerCardBack extends Card {
     
-    /**
-     * No arguments constructor with default settings
-     * Adds MouseMotionListener
-     */
-    public ComputerCard(){       
-        //set border color to differentiate from other type of cards
+    public ComputerCardBack(){       
+
         setBorder(new LineBorder(Color.WHITE, 3));
         
-        //add mouse listener
         addMouseListener(new MouseListener() {
-            
             @Override
             public void mouseClicked(MouseEvent e) {
                 //get the source of the event 
-                ComputerCard cc = (ComputerCard)e.getSource();
+                ComputerCardBack cc = (ComputerCardBack)e.getSource();
                 
                 System.out.println("COMPUTER CARD clicked");                
             }

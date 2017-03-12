@@ -1,31 +1,20 @@
 package cards;
 
-import cards.Card;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayDeque;
 
 /**
  * Representation of the face card, extends Card
- * @author Lorin
  */
 public class FaceCard extends Card{
     
-    /**
-     * Constructor with handle to faceCardArray
-     * Adds MouseListener
-     * @param faceCardArray 
-     */
     public FaceCard(ArrayDeque<PlayerCard> faceCardArray){
         
-        //set image
         this.setIcon(faceCardArray.getFirst().getCardIcon());
-        
-        //settings
         setLocation(350, 200);
         
         addMouseListener(new MouseListener() {
-
             @Override
             public void mouseClicked(MouseEvent e) { 
                 //get the source of the event                

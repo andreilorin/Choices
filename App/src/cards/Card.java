@@ -10,7 +10,6 @@ import javax.swing.border.LineBorder;
 
 /**
  * Base representation of the card, gets extended by all the other card classes
- * @author Lorin 
  */
 public abstract class Card extends JButton{
     
@@ -32,12 +31,8 @@ public abstract class Card extends JButton{
     
     public final ImageIcon backOfTheCard = new ImageIcon("src\\resources\\deckcard.png");
 
-    /**
-     * No arguments constructor with default settings
-     * Adds MouseMotionListener
-     */
-    public Card() {        
-        //settings
+    public Card() {  
+        
         setBorder(new LineBorder(Color.GREEN, 3));
         setBackground(Color.WHITE);
         setBounds(0, 0, 110, 160);        
@@ -45,7 +40,6 @@ public abstract class Card extends JButton{
         setOpaque(false);
         setIcon(backOfTheCard);
         
-        //Add mouse motion listener
         //Record the position where the mouse was clicked for 
         //repositioning implemented in the child classes by adding 
         //MouseListener        
@@ -65,12 +59,4 @@ public abstract class Card extends JButton{
 
         });  
     }
-
-    public int getMyX() {
-        return myX;
-    }
-
-    public int getMyY() {
-        return myY;
-    }        
 }
