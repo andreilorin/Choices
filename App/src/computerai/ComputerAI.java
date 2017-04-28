@@ -5,10 +5,6 @@ import java.util.Iterator;
 import table.Dealer;
 import table.Table;
 
-/**
- *
- * @author Lorin
- */
 public class ComputerAI {
     
     //The computerAI method uses Iterator to prevent ConcurrentModificationException

@@ -2,7 +2,7 @@ package table;
 
 import cards.PlayerCard;
 import cards.FaceCard;
-import cards.ComputerCard;
+import cards.ComputerCardBack;
 import cards.CommunityCard;
 import cards.Card;
 import java.awt.event.MouseEvent;
@@ -10,15 +10,12 @@ import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
  * Game class. This is where the game runs
- * @author Lorin
  */
 public class Table extends JFrame{
     
@@ -26,9 +23,9 @@ public class Table extends JFrame{
     public Dealer dealer = new Dealer();
     
     //Computer player hands
-    public ComputerCard computer1;
-    public ComputerCard computer2;
-    public ComputerCard computer3;
+    public ComputerCardBack computer1;
+    public ComputerCardBack computer2;
+    public ComputerCardBack computer3;
     
     //assistant
     public Assistant assistant;
@@ -64,10 +61,6 @@ public class Table extends JFrame{
         new Table();
     }
     
-    /**
-     * Constructor
-     * Sets up the game components
-     */
     public Table(){   
         addCardImages("src\\resources\\");
         addCardsToArray();
@@ -129,15 +122,15 @@ public class Table extends JFrame{
     
     public void placeDummyCards(){
        //create ComputerCard for computer2        
-        computer1 = new ComputerCard();         
+        computer1 = new ComputerCardBack();         
         computer1.setLocation(Card.COMPUTER1LOCATION);
         
         //create ComputerCard for computer2        
-        computer2 = new ComputerCard();         
+        computer2 = new ComputerCardBack();         
         computer2.setLocation(Card.COMPUTER2LOCATION);
         
         //create ComputerCard for computer3   
-        computer3 = new ComputerCard();
+        computer3 = new ComputerCardBack();
         computer3.setLocation(Card.COMPUTER3LOCATION);
         
         //create CommunityCard

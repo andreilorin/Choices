@@ -8,24 +8,10 @@ import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- * Represents the dealer
- * @author Lorin
- */
 public class Dealer {
     
     public static int roundNumber = 2;
    
-    /**
-     * Creates all the cards in the game with icons
-     * @param rank
-     * @param suit
-     * @param allImages
-     * @param faceCard
-     * @param humanPlayerHand
-     * @param table
-     * @return 
-     */
     public ArrayList<PlayerCard> createAllPlayerCards(String[] rank, String[] suit,
             ArrayList<ImageIcon> allImages, Table table){
         
@@ -40,14 +26,7 @@ public class Dealer {
         }        
         return allTheCards;
     }
-    
-    /**
-     * Deals the cards
-     * @param allTheCards
-     * @param faceCard
-     * @param players
-     * @param deck
-     */
+  
     public void deal(ArrayList<PlayerCard> allTheCards, ArrayDeque<PlayerCard> faceCard,
             ArrayList<ArrayList<PlayerCard>> players, ArrayDeque<PlayerCard>deck){          
         
@@ -110,6 +89,5 @@ public class Dealer {
         int thirdlayer = table.computer3hand.size();
         
         return "\nComputer1:" + firstPlayer + " Computer2:" + secondPlayer + " Computer3:" + thirdlayer;
-        
     }
 }
