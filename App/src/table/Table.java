@@ -23,9 +23,9 @@ public class Table extends JFrame{
     public Dealer dealer = new Dealer();
     
     //Computer player hands
-    public ComputerCardBack computer1;
-    public ComputerCardBack computer2;
-    public ComputerCardBack computer3;
+    private ComputerCardBack computer1;
+    private ComputerCardBack computer2;
+    private ComputerCardBack computer3;
     
     //assistant
     public Assistant assistant;
@@ -34,10 +34,10 @@ public class Table extends JFrame{
     public FaceCard faceCard;
    
     //Array to load all the images
-    public ArrayList<ImageIcon> allImages = new ArrayList<>(); 
+    private ArrayList<ImageIcon> allImages = new ArrayList<>(); 
     
     //Array to store all the cards
-    public ArrayList<PlayerCard> allTheCards;
+    private ArrayList<PlayerCard> allTheCards;
     
     //ArrayList for computer players 
     public ArrayList<PlayerCard> computer1hand = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Table extends JFrame{
     public ArrayList<PlayerCard> playerHand = new ArrayList<>(); 
     
     //ArrayList of players AL
-    public ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
+    private ArrayList<ArrayList<PlayerCard>> allPlayers = new ArrayList<>();
             
     //ArrayList for faceCard
     public ArrayDeque<PlayerCard> faceCardArray = new ArrayDeque<>();
@@ -56,9 +56,12 @@ public class Table extends JFrame{
     //ArrayDeque for ComunityCards
     public ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
     
+    //Game flag
+    private static boolean playing = true;
+    
     //main method    
     public static void main(String[] args) {        
-        new Table();
+            new Table();
     }
     
     public Table(){   
@@ -78,7 +81,7 @@ public class Table extends JFrame{
      * Adds all the cards from the humanPlayerHand array to the table at their 
      * place
      */    
-    public void placeCardsOnTable(){        
+    private void placeCardsOnTable(){        
         int playerX = 700;
         int location = 600/playerHand.size(); 
         
@@ -120,7 +123,7 @@ public class Table extends JFrame{
         }       
     }
     
-    public void placeDummyCards(){
+    private void placeDummyCards(){
        //create ComputerCard for computer2        
         computer1 = new ComputerCardBack();         
         computer1.setLocation(Card.COMPUTER1LOCATION);
@@ -191,7 +194,7 @@ public class Table extends JFrame{
         }
     }
     
-    public void addCardImages(String path){
+    private void addCardImages(String path){
          for(int i=0; i<52; i++){
             
             String name = path + i + ".png";           
@@ -204,19 +207,8 @@ public class Table extends JFrame{
             }
         }
     }
-    
-    // the method is leaking "this" in the constructor
-    public void setTableFrameAttributes(Table table){
-        table.setLayout(null);
-        table.setSize(1000, 800);
-        table.setLocation(500, 200);
-        table.setTitle("Choices");
-        table.setResizable(false);
-        table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
-        table.setVisible(true);    
-    }
-    
-    public void setTableFrameAttributes(){
+   
+    private void setTableFrameAttributes(){
         this.setLayout(null);
         this.setSize(1000, 800);
         this.setLocation(500, 200);
@@ -226,7 +218,7 @@ public class Table extends JFrame{
         this.setVisible(true);         
     }
     
-    public void placeRearangeButton(){
+    private void placeRearangeButton(){
         JButton rearangeCardsButton = new JButton("Rearange");
         rearangeCardsButton.setLocation(0, 0);
         rearangeCardsButton.setSize(150, 50);
@@ -251,7 +243,7 @@ public class Table extends JFrame{
         this.add(rearangeCardsButton);
     }
         
-    public void placeAssistantButton(){
+    private void placeAssistantButton(){
         JButton startAssistantButton = new JButton("Assistant");
         startAssistantButton.setLocation(200, 0);
         startAssistantButton.setSize(150, 50);        
@@ -280,25 +272,29 @@ public class Table extends JFrame{
         this.add(startAssistantButton);
     }
     
-    public void addPlayersArraysInAllPlayersArray(ArrayList<ArrayList<PlayerCard>> allPlayers, ArrayList<PlayerCard>... arrays){
+    private void addPlayersArraysInAllPlayersArray(ArrayList<ArrayList<PlayerCard>> allPlayers, ArrayList<PlayerCard>... arrays){
         for (ArrayList<PlayerCard> array : arrays) {
             allPlayers.add(array);
         }
     }
     
-    public void addAssistant(){
+    private void addAssistant(){
         assistant = new Assistant(this);
         assistant.run();
     }
     
-    public void addCardsToArray(){
+    private void addCardsToArray(){
         //create and add all the cards to the array
         allTheCards = dealer.createAllPlayerCards(Card.RANK, Card.SUIT, 
                 allImages, this);// 
     }
     
-    public void dealCards(){
+    private void dealCards(){
         dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
+    }
+    
+    public void isPlaying(boolean playing){
+        this.playing = playing;
     }
     
 }
