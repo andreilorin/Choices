@@ -59,12 +59,12 @@ public class Table extends JFrame{
     //Game flag
     private static boolean playing = true;
     
-    //main method    
-    public static void main(String[] args) {        
-            new Table();
-    }
     
-    public Table(){   
+    //Table instance for singleton pattern
+    private static Table table = new Table();
+    
+    //Private constructor for singleton pattern
+    private Table(){   
         addCardImages("src\\resources\\");
         addCardsToArray();
         addPlayersArraysInAllPlayersArray(allPlayers, computer1hand, computer2hand, computer3hand, playerHand);
@@ -75,6 +75,11 @@ public class Table extends JFrame{
         placeCardsOnTable();
         setTableFrameAttributes();
         addAssistant();
+    }
+    
+    //Getter for singleton pattern
+    public static Table startGame() {
+        return table;
     }
     
     /**
