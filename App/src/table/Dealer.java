@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Dealer {
-    
+        
     public static int roundNumber = 2;
    
     public ArrayList<PlayerCard> createAllPlayerCards(String[] rank, String[] suit,
@@ -73,14 +73,16 @@ public class Dealer {
         }
     }
     
-    public void checkForWinner(Collection hand, String message, String winner ){
+    public void checkForWinner(Collection hand, String message, String winner, Table table ){
         if(hand.isEmpty()){
             JOptionPane.showMessageDialog(null, winner, message, JOptionPane.INFORMATION_MESSAGE);
+            table.endGame(true);
+            
+            if(!table.isPlaying()) {
+                table.removeDummyCards();
+            }
+            
         }        
-    }
-    
-    public static int getRoundNumber(){
-        return roundNumber;
     }
     
     public String updateCardNumbers(Table table){

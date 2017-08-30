@@ -57,7 +57,7 @@ public class Table extends JFrame{
     public ArrayDeque<PlayerCard> communityCardsArray =  new ArrayDeque<>();
     
     //Game flag
-    private static boolean playing = true;
+    private boolean playing = false;
     
     
     //Table instance for singleton pattern
@@ -156,6 +156,12 @@ public class Table extends JFrame{
         this.add(faceCard);
     }
     
+    public void removeDummyCards() {
+        this.remove(computer1);
+        this.remove(computer2);
+        this.remove(computer3);
+    }
+    
     /**
      * Rearranges the cards on the table(they can get rearranged in random order
      * but the cards keep their order in the array they belong to)
@@ -224,7 +230,7 @@ public class Table extends JFrame{
     }
     
     private void placeRearangeButton(){
-        JButton rearangeCardsButton = new JButton("Rearange");
+        JButton rearangeCardsButton = new JButton("Rearange");        
         rearangeCardsButton.setLocation(0, 0);
         rearangeCardsButton.setSize(150, 50);
         rearangeCardsButton.addMouseListener(new MouseListener(){
@@ -245,7 +251,7 @@ public class Table extends JFrame{
             public void mouseExited(MouseEvent e) {}
         });        
         rearangeCardsButton.setVisible(true);        
-        this.add(rearangeCardsButton);
+        this.add(rearangeCardsButton);        
     }
         
     private void placeAssistantButton(){
@@ -260,7 +266,7 @@ public class Table extends JFrame{
                 assistant.textArea.setText(null);
                 LocalDateTime timePoint = LocalDateTime.now();
                 assistant.textArea.append("\n" + timePoint.getHour() + ":" + timePoint.getMinute() + ":" + timePoint.getSecond() +
-                        "| Round " + (Dealer.getRoundNumber() - 1) + ": click on " +  
+                        "| Round " + (Dealer.roundNumber - 1) + ": click on " +  
                         faceCardArray.getLast().getRank() + " or " + faceCardArray.getLast().getSuit());                                
             }
 
@@ -295,11 +301,17 @@ public class Table extends JFrame{
     }
     
     private void dealCards(){
-        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);           
+        dealer.deal(allTheCards, faceCardArray, allPlayers, communityCardsArray);
+        this.playing = true;
     }
     
-    public void isPlaying(boolean playing){
-        this.playing = playing;
+    public boolean isPlaying(){
+        return this.playing;
     }
     
+    public void endGame(boolean end) {
+        if(end) {
+            this.playing = false;
+        }
+    }
 }

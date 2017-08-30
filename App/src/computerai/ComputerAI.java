@@ -27,7 +27,7 @@ public class ComputerAI {
             }
         }
         
-        table.dealer.checkForWinner(table.computer1hand, "Computer1 Wins", "YOU LOST !");
+        table.dealer.checkForWinner(table.computer1hand, "Computer1 Wins", "YOU LOST !", table);
         
         int computer1handSizeAfter = table.computer1hand.size();
         
@@ -52,7 +52,7 @@ public class ComputerAI {
             }
         }
         
-        table.dealer.checkForWinner(table.computer2hand, "Computer2 Wins", "YOU LOST !");
+        table.dealer.checkForWinner(table.computer2hand, "Computer2 Wins", "YOU LOST !", table);
         
         int computer2handSizeAfter = table.computer2hand.size();
         
@@ -77,7 +77,7 @@ public class ComputerAI {
             }
         }
         
-        table.dealer.checkForWinner(table.computer3hand, "Computer3 Wins", "YOU LOST !");
+        table.dealer.checkForWinner(table.computer3hand, "Computer3 Wins", "YOU LOST !", table);
         
         int computer3handSizeAfter = table.computer3hand.size();
         

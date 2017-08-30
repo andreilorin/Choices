@@ -110,7 +110,7 @@ public class PlayerCard extends Card {
                     table.playerHand.remove(pc);
                     
                     //check for winner
-                    table.dealer.checkForWinner(table.playerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !");
+                    table.dealer.checkForWinner(table.playerHand, "Human Player Wins","CONGRATULATIONS YOU ARE THE WINNER !", table);
                                            
                     ComputerAI.move(table);
                     

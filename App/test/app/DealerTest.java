@@ -70,7 +70,7 @@ public class DealerTest {
     @Before
     public void setUp() {
         dealer = new Dealer();
-        table = new Table();
+//        table = new Table();
     }
     
     @After
