@@ -122,4 +122,16 @@ public class PlayerCard extends Card {
                     table.dealer.roundNumber++;                  
                 }                      
     }
+    
+    public int getCardPoints() {
+        if (this.rank.equalsIgnoreCase("2")) return 2;
+        else if (this.rank.equalsIgnoreCase("3")) return 3;
+        else if (this.rank.equalsIgnoreCase("4")) return 4;
+        else if (this.rank.equalsIgnoreCase("5")) return 5;
+        else if (this.rank.equalsIgnoreCase("6")) return 6;
+        else if (this.rank.equalsIgnoreCase("7")) return 25;
+        else if (this.rank.equalsIgnoreCase("8")) return 8;
+        else if (this.rank.equalsIgnoreCase("9")) return 9;
+        else return 10;
+    }
 }
