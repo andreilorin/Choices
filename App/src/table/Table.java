@@ -314,4 +314,19 @@ public class Table extends JFrame{
             this.playing = false;
         }
     }
+    
+    public int countPlayerPoints(ArrayList<PlayerCard> cards) {
+        int result = 0;
+        for (PlayerCard c : cards) {
+            result += c.getCardPoints();
+        }
+        return result;
+    }
+    
+    public void printAllPoints() {
+        System.out.println("You - " + countPlayerPoints(playerHand));
+        System.out.println("P1 - " + countPlayerPoints(computer1hand));
+        System.out.println("P2 - " + countPlayerPoints(computer2hand));
+        System.out.println("P3 - " + countPlayerPoints(computer3hand));
+    }
 }

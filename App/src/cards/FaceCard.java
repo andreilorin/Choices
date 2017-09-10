@@ -7,9 +7,9 @@ import java.util.ArrayDeque;
 /**
  * Representation of the face card, extends Card
  */
-public class FaceCard extends Card{
+public class FaceCard extends Card {
     
-    public FaceCard(ArrayDeque<PlayerCard> faceCardArray){
+    public FaceCard(ArrayDeque<PlayerCard> faceCardArray) {
         
         this.setIcon(faceCardArray.getFirst().getCardIcon());
         setLocation(350, 200);

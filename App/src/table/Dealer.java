@@ -80,6 +80,7 @@ public class Dealer {
             
             if(!table.isPlaying()) {
                 table.removeDummyCards();
+                table.printAllPoints();
             }
             
         }        
